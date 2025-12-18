@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Style pour améliorer l'apparence des tags transformés */
+        .tag-pill {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            color: #555;
+            border: 1px solid #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <div style="padding: 20px;">
@@ -57,22 +69,21 @@
                     return;
                 }
 
-                // Affichage des textes
+                // Affichage des textes informatifs
                 document.getElementById('display-alias').textContent = urlParams.get('alias') || "Fichier";
                 document.getElementById('display-path').textContent = filePath;
                 document.getElementById('display-owner').textContent = urlParams.get('owner') || "l'auteur";
                 document.getElementById('display-author').textContent = urlParams.get('author') || "Admin";
                 document.getElementById('download-btn').href = filePath;
 
-                status.textContent = "Tentative de récupération du fichier : " + filePath + "...";
+                status.textContent = "Chargement des données...";
 
                 const response = await fetch(filePath);
                 
                 if (!response.ok) {
-                    throw new Error("Le fichier est introuvable au chemin indiqué (Erreur " + response.status + "). Vérifiez que le fichier est bien sur GitHub.");
+                    throw new Error("Erreur " + response.status + " : Impossible de récupérer le fichier.");
                 }
 
-                // Date de modif
                 const lastMod = response.headers.get('Last-Modified');
                 if (lastMod) {
                     document.getElementById('last-modified').textContent = "Dernière mise à jour : " + new Date(lastMod).toLocaleDateString('fr-FR');
@@ -96,8 +107,17 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(c => {
-                        let val = c.trim().replace(/^"|"$/g, '').replace(/\s{2,}/g, ', ');
-                        html += `<td>${val}</td>`;
+                        // 1. Nettoyage des guillemets
+                        let val = c.trim().replace(/^"|"$/g, '');
+                        
+                        // 2. MODIFICATION : Remplace 2+ espaces par une virgule et un espace
+                        // On vérifie si la valeur contient ces espaces pour appliquer le style "tag"
+                        if (/\s{2,}/.test(val)) {
+                            val = val.replace(/\s{2,}/g, ', ');
+                            html += `<td><span class="tag-pill">${val}</span></td>`;
+                        } else {
+                            html += `<td>${val}</td>`;
+                        }
                     });
                     html += '</tr>';
                 });
@@ -111,7 +131,6 @@
                     <div style="background: #fff5f5; border: 1px solid #feb2b2; padding: 20px; border-radius: 8px; color: #c53030;">
                         <h3 style="margin-top:0;">Échec du chargement</h3>
                         <p>${err.message}</p>
-                        <p style="font-size:0.9em; color:#666;">Conseil : Vérifiez que le dossier <b>database/</b> et votre fichier CSV sont bien présents sur votre dépôt GitHub.</p>
                     </div>
                 `;
             }
