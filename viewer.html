@@ -76,10 +76,14 @@
                 document.getElementById('display-author').textContent = urlParams.get('author');
                 document.getElementById('download-btn').href = filePath;
 
-                // Affichage du crédit image si présent
-                if (imageAuthor && imageAuthor.trim() !== "" && imageAuthor !== "undefined") {
-                    document.getElementById('display-image-author').textContent = imageAuthor;
-                    document.getElementById('display-image-author-container').style.display = 'block';
+                // LOGIQUE DE L'AUTEUR D'IMAGE
+                if (imageAuthor && imageAuthor !== "" && imageAuthor !== "null" && imageAuthor !== "undefined") {
+                    const authorElement = document.getElementById('display-image-author');
+                    const containerElement = document.getElementById('display-image-author-container');
+                    if (authorElement && containerElement) {
+                        authorElement.textContent = imageAuthor;
+                        containerElement.style.display = 'block';
+                    }
                 }
 
                 const response = await fetch(filePath);
@@ -151,4 +155,5 @@
     </script>
 </body>
 </html>
+
 
