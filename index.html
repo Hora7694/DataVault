@@ -23,7 +23,7 @@
     </footer>
 
     <script>
-        // Ta liste simplifiée
+        // Ta liste avec uniquement Yo-kai Watch
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2", 
@@ -35,6 +35,13 @@
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
 
+        // Fonction unique pour rediriger proprement
+        function goToViewer(file) {
+            const url = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}`;
+            window.location.href = url;
+        }
+
+        // Gestion des suggestions pendant la frappe
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase();
             suggestionsBox.innerHTML = '';
@@ -51,29 +58,35 @@
                 div.onclick = () => {
                     searchInput.value = file.alias;
                     suggestionsBox.style.display = 'none';
-                    goToViewer(file); // Envoi direct au clic
+                    goToViewer(file); // Redirection immédiate au clic sur suggestion
                 };
                 suggestionsBox.appendChild(div);
             });
             suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
 
-        function goToViewer(file) {
-            const url = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}`;
-            window.location.href = url;
-        }
-
+        // Gestion de la validation du formulaire (bouton Afficher ou Touche Entrée)
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
-            const val = searchInput.value;
-            const found = availableFiles.find(f => f.alias === val || f.path === val);
+            const userInput = searchInput.value.trim().toLowerCase();
+            
+            // On cherche si ce que l'utilisateur a tapé correspond à un alias ou un chemin
+            const found = availableFiles.find(f => 
+                f.alias.toLowerCase() === userInput || 
+                f.path.toLowerCase() === userInput
+            );
             
             if (found) {
                 goToViewer(found);
             } else {
-                alert("Fichier non trouvé dans la liste.");
+                alert("Fichier non reconnu. Essayez de sélectionner une suggestion.");
             }
         };
+
+        // Fermer les suggestions si on clique ailleurs
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
+        });
     </script>
 </body>
 </html>
