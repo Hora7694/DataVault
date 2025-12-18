@@ -4,5 +4,11 @@
     "path": "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
     "owner": "LEVEL-5 Inc.",
     "author": "kHorah_"
+  },
+  {
+    "alias": "Liste de Test",
+    "path": "database/test/test.csv",
+    "owner": "Gemini",
+    "author": "kHorah_"
   }
 ]
