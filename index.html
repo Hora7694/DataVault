@@ -73,9 +73,6 @@
             }
     
             if (path) {
-                // REVOICI LA POPUP QUE TU VOULAIS
-                alert("Ouverture du fichier : " + path); 
-                
                 // Redirection après avoir cliqué sur OK
                 const url = 'viewer.html?file=' + encodeURIComponent(path) + '&alias=' + encodeURIComponent(alias);
                 window.location.href = url;
@@ -92,4 +89,5 @@
     </script>
 </body>
 </html>
+
 
