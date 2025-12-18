@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+
     <h1>DataVault</h1>
+    
     <div class="search-container">
         <form id="search-form" autocomplete="off">
             <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)...">
@@ -15,6 +17,7 @@
         </form>
         <div id="suggestions" class="suggestions-box"></div>
     </div>
+
     <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 100px; font-size: 0.8em; color: #888;">
         <p>&copy; 2025 DataVault &bull; <a href="legale.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
     </footer>
@@ -25,14 +28,22 @@
         const suggestionsBox = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
+        // CHARGEMENT DU JSON
         async function initData() {
             try {
-                // On force le chemin relatif avec ./ pour éviter le failure sur GitHub
                 const response = await fetch('./registry.json');
-                if (!response.ok) throw new Error("Registre introuvable");
-                availableFiles = await response.json();
+                if (!response.ok) throw new Error("Erreur serveur : " + response.status);
+                
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    availableFiles = data;
+                } else {
+                    throw new Error("Le format du JSON n'est pas un tableau [ ]");
+                }
             } catch (err) {
                 console.error("Erreur Backend:", err);
+                // On affiche l'erreur sur la page pour que tu la voies direct
+                document.body.insertAdjacentHTML('afterbegin', `<div style="background:red; color:white; padding:10px; text-align:center;">ERREUR BACKEND : ${err.message}</div>`);
             }
         }
 
@@ -50,7 +61,9 @@
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
             if (val.length < 1) { suggestionsBox.style.display = 'none'; return; }
+
             const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
+
             if (matches.length > 0) {
                 matches.forEach(file => {
                     const div = document.createElement('div');
@@ -76,6 +89,10 @@
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
             if (found) goToViewer(found);
             else alert("Fichier non trouvé.");
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
         });
 
         initData();
