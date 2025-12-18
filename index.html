@@ -18,32 +18,30 @@
     </div>
 
     <script>
-        // CONFIGURATION DES FICHIERS
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2 - Liste des Yo-kai", 
                 path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv" 
             }
         ];
-
+    
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
-
-        // Gérer les suggestions
+    
         searchInput.addEventListener('input', function() {
             const val = this.value.toLowerCase();
             suggestionsBox.innerHTML = '';
-
+    
             if (!val) {
                 suggestionsBox.style.display = 'none';
                 return;
             }
-
+    
             const matches = availableFiles.filter(f => 
                 f.alias.toLowerCase().includes(val) || 
                 f.path.toLowerCase().includes(val)
             );
-
+    
             if (matches.length > 0) {
                 matches.forEach(file => {
                     const div = document.createElement('div');
@@ -63,31 +61,35 @@
                 suggestionsBox.style.display = 'none';
             }
         });
-
-        // Fermer si on clique ailleurs
+    
+        document.getElementById('search-form').onsubmit = function(e) {
+            e.preventDefault();
+            const alias = searchInput.value;
+            let path = searchInput.getAttribute('data-path');
+    
+            if (!path) {
+                const found = availableFiles.find(f => f.alias === alias);
+                if (found) path = found.path;
+            }
+    
+            if (path) {
+                // REVOICI LA POPUP QUE TU VOULAIS
+                alert("Ouverture du fichier : " + path); 
+                
+                // Redirection après avoir cliqué sur OK
+                const url = 'viewer.html?file=' + encodeURIComponent(path) + '&alias=' + encodeURIComponent(alias);
+                window.location.href = url;
+            } else {
+                alert("Fichier non trouvé. Veuillez sélectionner une suggestion.");
+            }
+        };
+    
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-container')) {
                 suggestionsBox.style.display = 'none';
             }
         });
-
-        // Envoi vers le viewer
-        document.getElementById('search-form').onsubmit = function(e) {
-            e.preventDefault();
-            const alias = searchInput.value;
-            let path = searchInput.getAttribute('data-path');
-
-            // Si l'utilisateur a tapé sans cliquer, on cherche le chemin correspondant
-            if (!path) {
-                const found = availableFiles.find(f => f.alias === alias);
-                if (found) path = found.path;
-            }
-
-            if (path) {
-                const url = 'viewer.html?file=' + encodeURIComponent(path) + '&alias=' + encodeURIComponent(alias);
-                window.location.href = url;
-            }
-        };
     </script>
 </body>
 </html>
+
