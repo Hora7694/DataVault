@@ -53,9 +53,8 @@
     </footer>
 
     <script>
-        let availableFiles = []; // Liste vide au départ
+        let availableFiles = [];
 
-        // RÉCUPÉRATION DES DONNÉES DEPUIS LE JSON
         async function loadRegistry() {
             try {
                 const response = await fetch('registry.json');
@@ -69,6 +68,7 @@
         const suggestionsBox = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
+        // FONCTION MISE À JOUR : Transmet la taille min des images
         function goToViewer(file) {
             if (!file) return;
             const p = new URLSearchParams();
@@ -77,6 +77,12 @@
             p.append('owner', file.owner);
             p.append('author', file.author);
             p.append('image_author', file.image_author || "");
+            
+            // On ajoute la taille min (récupérée du JSON ou 50 par défaut)
+            // On retire "px" si l'utilisateur l'a écrit dans le JSON pour n'avoir que le chiffre
+            const minSize = file.min_img_size ? file.min_img_size.toString().replace('px', '') : "50";
+            p.append('min_size', minSize);
+
             window.location.href = "viewer.html?" + p.toString();
         }
 
@@ -126,7 +132,6 @@
             }
         });
 
-        // Lancer le chargement au démarrage
         loadRegistry();
 
         const btn = document.getElementById('theme-toggle');
@@ -143,4 +148,3 @@
     </script>
 </body>
 </html>
-
