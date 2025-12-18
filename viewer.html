@@ -11,9 +11,8 @@
         
         <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
             <h1 id="display-alias" style="margin: 0; white-space: nowrap; font-size: 1.8em;">Chargement...</h1>
-            
             <a id="download-btn" href="#" download style="text-decoration: none;">
-                <button style="background-color: #5553ff; padding: 8px 15px; font-size: 0.85em; border-radius: 20px;">
+                <button style="background-color: #5553ff; padding: 8px 15px; font-size: 0.85em; border-radius: 20px; color: white; border: none; cursor: pointer;">
                     Télécharger CSV
                 </button>
             </a>
@@ -25,25 +24,27 @@
 
     <div id="table-container"></div>
 
-    <div style="text-align: center; padding: 40px; color: #888; font-size: 0.9em; border-top: 1px solid #eee; margin-top: 20px;">
-        <p>Base de données fournie par <strong>X</strong></p>
-    </div>
+    <footer style="text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 1px solid #eee; color: #888; font-size: 0.85em;">
+        <p>Base de données fournie par <strong id="display-owner">X</strong></p>
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Droits d'auteur</a></p>
+    </footer>
 
     <script>
         async function loadCSV() {
             const params = new URLSearchParams(window.location.search);
             const filePath = params.get('file');
             const fileAlias = params.get('alias');
+            const fileOwner = params.get('owner');
             
             if (!filePath) return;
 
             document.getElementById('display-alias').textContent = fileAlias || "Fichier";
             document.getElementById('display-path').textContent = filePath;
+            document.getElementById('display-owner').textContent = fileOwner || "X";
             document.getElementById('download-btn').href = filePath;
 
             try {
                 const response = await fetch(filePath);
-                
                 const lastMod = response.headers.get('Last-Modified');
                 if (lastMod) {
                     const date = new Date(lastMod);
@@ -62,39 +63,30 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(cell => {
-                        let cleanCell = cell.trim().replace(/^"|"$/g, '');
-                        cleanCell = cleanCell.replace(/\s{2,}/g, ', ');
-                        html += `<td>${cleanCell}</td>`;
+                        let clean = cell.trim().replace(/^"|"$/g, '').replace(/\s{2,}/g, ', ');
+                        html += `<td>${clean}</td>`;
                     });
                     html += '</tr>';
                 });
 
                 html += '</tbody></table>';
                 document.getElementById('table-container').innerHTML = html;
-
-            } catch (error) {
-                document.getElementById('display-alias').innerHTML = "Erreur de chargement";
+            } catch (e) {
+                document.getElementById('display-alias').textContent = "Erreur de chargement";
             }
         }
 
         function parseCSVLine(line) {
             const result = [];
-            let current = '';
-            let inQuotes = false;
-            for (let i = 0; i < line.length; i++) {
-                const char = line[i];
+            let current = '', inQuotes = false;
+            for (let char of line) {
                 if (char === '"') inQuotes = !inQuotes;
-                else if (char === ',' && !inQuotes) {
-                    result.push(current);
-                    current = '';
-                } else {
-                    current += char;
-                }
+                else if (char === ',' && !inQuotes) { result.push(current); current = ''; }
+                else current += char;
             }
             result.push(current);
             return result;
         }
-
         loadCSV();
     </script>
 </body>
