@@ -11,7 +11,7 @@
     
     <div class="search-container">
         <form id="search-form" autocomplete="off">
-            <input type="search" id="site-search" placeholder="Rechercher un fichier...">
+            <input type="search" id="site-search" placeholder="Rechercher un fichier (ex: Yo-kai Watch)...">
             <button type="submit">Afficher</button>
         </form>
         <div id="suggestions" class="suggestions-box"></div>
@@ -23,9 +23,10 @@
     </footer>
 
     <script>
+        // Ta liste simplifiée
         const availableFiles = [
             { 
-                alias: "Yo-kai Watch 2 - Liste des Yo-kai", 
+                alias: "Yo-kai Watch 2", 
                 path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
                 owner: "LEVEL-5 Inc." 
             }
@@ -49,29 +50,28 @@
                 div.innerHTML = `<strong>${file.alias}</strong><br><small>${file.path}</small>`;
                 div.onclick = () => {
                     searchInput.value = file.alias;
-                    searchInput.setAttribute('data-path', file.path);
-                    searchInput.setAttribute('data-owner', file.owner);
                     suggestionsBox.style.display = 'none';
+                    goToViewer(file); // Envoi direct au clic
                 };
                 suggestionsBox.appendChild(div);
             });
             suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
 
+        function goToViewer(file) {
+            const url = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}`;
+            window.location.href = url;
+        }
+
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
-            const alias = searchInput.value;
-            let path = searchInput.getAttribute('data-path');
-            let owner = searchInput.getAttribute('data-owner');
-
-            if (!path) {
-                const found = availableFiles.find(f => f.alias === alias);
-                if (found) { path = found.path; owner = found.owner; }
-            }
-
-            if (path) {
-                alert("Ouverture du fichier : " + path);
-                window.location.href = `viewer.html?file=${encodeURIComponent(path)}&alias=${encodeURIComponent(alias)}&owner=${encodeURIComponent(owner || 'X')}`;
+            const val = searchInput.value;
+            const found = availableFiles.find(f => f.alias === val || f.path === val);
+            
+            if (found) {
+                goToViewer(found);
+            } else {
+                alert("Fichier non trouvé dans la liste.");
             }
         };
     </script>
