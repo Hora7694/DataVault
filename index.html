@@ -3,72 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataVault - Recherche</title>
+    <title>DataVault - Index</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Structure pour forcer le footer en bas */
-        html, body { height: 100%; margin: 0; }
+        html, body { height: 100%; margin: 0; font-family: sans-serif; }
         body { display: flex; flex-direction: column; }
-        .main-content { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px;
-        }
+        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .search-container { position: relative; width: 300px; }
+        .suggestions-box { position: absolute; width: 100%; background: white; border: 1px solid #ddd; display: none; z-index: 10; }
+        .suggestion-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; }
+        .suggestion-item:hover { background: #f0f0f0; }
     </style>
 </head>
 <body>
 
     <div class="main-content">
         <h1>DataVault</h1>
-        
         <div class="search-container">
             <form id="search-form" autocomplete="off">
-                <input type="search" id="site-search" placeholder="Rechercher un fichier...">
-                <button type="submit">Afficher</button>
+                <input type="search" id="site-search" placeholder="Rechercher..." style="width: 100%; padding: 10px;">
             </form>
             <div id="suggestions" class="suggestions-box"></div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8;">
-        <p>Plateforme de données <strong>DataVault</strong></p>
-        
-        <div style="margin: 20px 0;">
+    <footer style="text-align: center; padding: 20px; border-top: 1px solid #eee;">
+        <div id="kofi-widget">
             <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
             <script type='text/javascript'>
                 kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
                 kofiwidget2.draw();
             </script>
         </div>
-
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales & Confidentialité</a></p>
+        <p>&copy; 2025 DataVault &bull; <a href="legal.html">Mentions Légales</a></p>
     </footer>
 
     <script>
         let availableFiles = [];
 
-        // Chargement du registre JSON
-        async function initData() {
-            try {
-                const response = await fetch('registry.json');
-                if (!response.ok) throw new Error("Erreur registre");
-                availableFiles = await response.json();
-            } catch (err) {
-                console.error("Échec du chargement du registre:", err);
-            }
-        }
-
-        function goToViewer(file) {
-            const p = new URLSearchParams();
-            p.append('file', file.path);
-            p.append('alias', file.alias);
-            p.append('owner', file.owner);
-            p.append('author', file.author);
-            window.location.href = "viewer.html?" + p.toString();
-        }
+        // Charger le registre
+        fetch('registry.json')
+            .then(response => response.json())
+            .then(data => { availableFiles = data; })
+            .catch(err => console.error("Erreur de chargement du registre JSON:", err));
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
@@ -84,21 +61,18 @@
                 const div = document.createElement('div');
                 div.className = 'suggestion-item';
                 div.innerHTML = `<strong>${file.alias}</strong>`;
-                div.onclick = () => goToViewer(file);
+                div.onclick = () => {
+                    const p = new URLSearchParams();
+                    p.append('file', file.path);
+                    p.append('alias', file.alias);
+                    p.append('owner', file.owner);
+                    p.append('author', file.author);
+                    window.location.href = "viewer.html?" + p.toString();
+                };
                 suggestionsBox.appendChild(div);
             });
             suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
-
-        document.getElementById('search-form').onsubmit = (e) => {
-            e.preventDefault();
-            const val = searchInput.value.trim().toLowerCase();
-            const found = availableFiles.find(f => f.alias.toLowerCase() === val);
-            if (found) goToViewer(found);
-            else alert("Fichier non trouvé.");
-        };
-
-        initData();
     </script>
 </body>
 </html>
