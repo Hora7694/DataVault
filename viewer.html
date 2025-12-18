@@ -6,14 +6,15 @@
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Style pour les images dans le tableau */
+        /* Style pour les images dans les cellules sans casser le reste */
         .cell-image {
             max-width: 50px;
             max-height: 50px;
-            border-radius: 4px;
+            object-fit: contain;
             display: block;
             margin: auto;
         }
+        /* Style pour les tags (conservé) */
         .tag-pill {
             display: inline-block;
             background: #f0f0f0;
@@ -46,7 +47,7 @@
 
     <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888;">
         <p>Base de données créée par <strong id="display-author">...</strong></p>
-        <p id="credit-image-container" style="display: none;">Images fournies par : <strong id="display-image-author"></strong></p>
+        <p id="display-image-author-container" style="display:none;">Images fournies par : <strong id="display-image-author"></strong></p>
         <p>Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
     </footer>
 
@@ -56,7 +57,7 @@
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const filePath = urlParams.get('file');
-                const imgAuthor = urlParams.get('image_author'); // Récupération du nouvel auteur image
+                const imageAuthor = urlParams.get('image_author');
 
                 if (!filePath) throw new Error("Aucun fichier spécifié.");
 
@@ -67,10 +68,9 @@
                 document.getElementById('download-btn').href = filePath;
 
                 // Affichage du crédit image si présent
-                if (imgAuthor && imgAuthor !== "undefined" && imgAuthor.trim() !== "") {
-                    const creditContainer = document.getElementById('credit-image-container');
-                    document.getElementById('display-image-author').textContent = imgAuthor;
-                    creditContainer.style.display = 'block';
+                if (imageAuthor && imageAuthor.trim() !== "" && imageAuthor !== "undefined") {
+                    document.getElementById('display-image-author').textContent = imageAuthor;
+                    document.getElementById('display-image-author-container').style.display = 'block';
                 }
 
                 const response = await fetch(filePath);
@@ -90,13 +90,11 @@
                     cells.forEach(c => {
                         let val = c.trim().replace(/^"|"$/g, '');
                         
-                        // DETECTION D'IMAGE
-                        const isImage = (url) => {
-                            return url.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || url.includes("static.wikia.nocookie.net");
-                        };
+                        // DETECTION D'IMAGE (Vérifie si c'est un lien d'image)
+                        const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || val.includes("static.wikia.nocookie.net");
 
-                        if (val.startsWith('http') && isImage(val)) {
-                            html += `<td><img src="${val}" class="cell-image" alt="icon"></td>`;
+                        if (val.startsWith('http') && isImgUrl) {
+                            html += `<td><img src="${val}" class="cell-image"></td>`;
                         } else if (/\s{2,}/.test(val)) {
                             val = val.replace(/\s{2,}/g, ', ');
                             html += `<td><span class="tag-pill">${val}</span></td>`;
@@ -111,7 +109,7 @@
 
             } catch (err) {
                 console.error(err);
-                container.innerHTML = `<p style="color:red; text-align:center;">Erreur: ${err.message}</p>`;
+                container.innerHTML = `<div style="padding: 20px; color: red;">Erreur: ${err.message}</div>`;
             }
         }
 
@@ -129,7 +127,7 @@
 
         loadCSV();
 
-        // Dark Mode Logic
+        // LOGIQUE DARK MODE
         const btn = document.getElementById('theme-toggle');
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
