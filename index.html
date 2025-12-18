@@ -3,94 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataVault - Index des Données</title>
+    <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-    <header style="text-align: center; padding: 40px 0;">
-        <h1>DataVault</h1>
-        <p style="color: #666;">Explorateur de bases de données universel</p>
-    </header>
+    <h1>DataVault</h1>
     
-    <main class="search-container">
+    <div class="search-container">
         <form id="search-form" autocomplete="off">
-            <input type="search" id="site-search" placeholder="Rechercher un fichier (ex: Yo-kai Watch)...">
+            <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)...">
             <button type="submit">Afficher</button>
         </form>
         <div id="suggestions" class="suggestions-box"></div>
-    </main>
+    </div>
 
-    <footer style="text-align: center; padding: 60px 20px; border-top: 1px solid #eee; color: #888; font-size: 0.85em; margin-top: 100px;">
-        <p>Plateforme <strong>DataVault</strong> &bull; Centralisation de données</p>
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Confidentialité</a></p>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 100px; font-size: 0.8em; color: #888;">
+        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
     </footer>
 
     <script>
-        /**
-         * CONFIGURATION DES FICHIERS
-         * Ajoute tes nouveaux fichiers CSV ici
-         */
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2", 
                 path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
                 owner: "LEVEL-5 Inc.", 
-                author: "Admin" // Remplace par ton pseudo
+                author: "Admin" 
             }
         ];
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
 
-        // Redirection vers le viewer avec les paramètres sécurisés
         function goToViewer(file) {
-            const params = new URLSearchParams({
-                file: file.path,
-                alias: file.alias,
-                owner: file.owner,
-                author: file.author
-            });
-            window.location.href = `viewer.html?${params.toString()}`;
+            // Construction propre de l'URL avec les 4 paramètres
+            const url = "viewer.html" + 
+                "?file=" + encodeURIComponent(file.path) + 
+                "&alias=" + encodeURIComponent(file.alias) + 
+                "&owner=" + encodeURIComponent(file.owner) + 
+                "&author=" + encodeURIComponent(file.author);
+            window.location.href = url;
         }
 
-        // Système de suggestions en temps réel
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
             if (!val) { suggestionsBox.style.display = 'none'; return; }
 
-            const matches = availableFiles.filter(f => 
-                f.alias.toLowerCase().includes(val) || f.path.toLowerCase().includes(val)
-            );
+            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
 
             matches.forEach(file => {
                 const div = document.createElement('div');
                 div.className = 'suggestion-item';
-                div.innerHTML = `<strong>${file.alias}</strong><br><small>${file.path}</small>`;
-                div.onclick = () => {
-                    searchInput.value = file.alias;
-                    suggestionsBox.style.display = 'none';
-                    goToViewer(file);
-                };
+                div.innerHTML = `<strong>${file.alias}</strong>`;
+                div.onclick = () => goToViewer(file); // Redirection directe
                 suggestionsBox.appendChild(div);
             });
             suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
 
-        // Validation du formulaire
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
-            const userInput = searchInput.value.trim().toLowerCase();
-            const found = availableFiles.find(f => f.alias.toLowerCase() === userInput);
+            const val = searchInput.value.trim().toLowerCase();
+            const found = availableFiles.find(f => f.alias.toLowerCase() === val);
             if (found) goToViewer(found);
-            else alert("Veuillez sélectionner un fichier valide dans la liste.");
+            else alert("Veuillez sélectionner un fichier valide.");
         };
-
-        // Fermer les suggestions au clic extérieur
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
-        });
     </script>
 </body>
 </html>
