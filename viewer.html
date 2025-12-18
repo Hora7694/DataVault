@@ -66,6 +66,13 @@
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const filePath = urlParams.get('file');
+
+                // --- AJOUT : Récupérer la taille min depuis l'URL ---
+                const minSize = urlParams.get('min_size');
+                if (minSize) {
+                    document.documentElement.style.setProperty('--min-size', minSize + 'px');
+                }
+                
                 const imageAuthor = urlParams.get('image_author');
 
                 if (!filePath) throw new Error("Aucun fichier spécifié.");
@@ -157,3 +164,4 @@
     </script>
 </body>
 </html>
+
