@@ -75,7 +75,7 @@
                 alias: file.alias,
                 owner: file.owner,
                 author: file.author,
-                image_author: file.image_author || "" // On ajoute cette ligne
+                image_author: file.image_author || "" // On ajoute le paramètre ici
             });
             window.location.href = `viewer.html?${params.toString()}`;
         }
@@ -143,4 +143,5 @@
     </script>
 </body>
 </html>
+
 
