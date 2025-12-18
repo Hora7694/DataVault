@@ -23,6 +23,7 @@
     </footer>
 
     <script>
+        // LISTE DES FICHIERS (Vérifie bien les chemins !)
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2", 
@@ -34,41 +35,72 @@
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
+        const searchForm = document.getElementById('search-form');
 
+        // FONCTION DE REDIRECTION (Sécurisée)
         function goToViewer(file) {
-            // Construction propre de l'URL avec les 4 paramètres
-            const url = "viewer.html" + 
-                "?file=" + encodeURIComponent(file.path) + 
-                "&alias=" + encodeURIComponent(file.alias) + 
-                "&owner=" + encodeURIComponent(file.owner) + 
-                "&author=" + encodeURIComponent(file.author);
-            window.location.href = url;
+            if (!file) return;
+            const p = new URLSearchParams();
+            p.append('file', file.path);
+            p.append('alias', file.alias);
+            p.append('owner', file.owner);
+            p.append('author', file.author);
+            window.location.href = "viewer.html?" + p.toString();
         }
 
+        // AFFICHAGE DES SUGGESTIONS
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
-            if (!val) { suggestionsBox.style.display = 'none'; return; }
+            
+            if (val.length < 1) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
 
-            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
+            const matches = availableFiles.filter(f => 
+                f.alias.toLowerCase().includes(val)
+            );
 
-            matches.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'suggestion-item';
-                div.innerHTML = `<strong>${file.alias}</strong>`;
-                div.onclick = () => goToViewer(file); // Redirection directe
-                suggestionsBox.appendChild(div);
-            });
-            suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
+            if (matches.length > 0) {
+                matches.forEach(file => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.style.cursor = 'pointer';
+                    div.innerHTML = `<strong>${file.alias}</strong>`;
+                    // Clic sur une suggestion
+                    div.addEventListener('click', () => {
+                        searchInput.value = file.alias;
+                        suggestionsBox.style.display = 'none';
+                        goToViewer(file);
+                    });
+                    suggestionsBox.appendChild(div);
+                });
+                suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
         });
 
-        document.getElementById('search-form').onsubmit = (e) => {
+        // VALIDATION DU FORMULAIRE (Bouton ou Entrée)
+        searchForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const val = searchInput.value.trim().toLowerCase();
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
-            if (found) goToViewer(found);
-            else alert("Veuillez sélectionner un fichier valide.");
-        };
+            
+            if (found) {
+                goToViewer(found);
+            } else {
+                alert("Fichier non trouvé. Veuillez taper le nom exact ou cliquer sur une suggestion.");
+            }
+        });
+
+        // FERMER LES SUGGESTIONS SI ON CLIQUE AILLEURS
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                suggestionsBox.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
