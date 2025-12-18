@@ -7,117 +7,66 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div style="padding: 20px;">
+    <div style="padding: 20px; border-bottom: 1px solid #eee;">
         <button onclick="window.history.back()" class="btn-back">← Retour</button>
-        
-        <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
-            <h1 id="display-alias" style="margin: 0; white-space: nowrap;">Chargement...</h1>
-            <a id="download-btn" href="#" download>
-                <button style="background-color: #5553ff; padding: 8px 15px; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">
-                    Télécharger CSV
-                </button>
-            </a>
+        <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
+            <h1 id="display-alias" style="margin: 0;">Chargement...</h1>
+            <a id="download-btn" href="#" download><button class="btn-download">Télécharger CSV</button></a>
         </div>
-        <p id="display-path" style="color: #888; font-size: 0.85em; margin-top: 5px; font-family: monospace;"></p>
-        <p id="last-modified" style="font-size: 0.8em; color: #aaa; margin-top: 5px;"></p>
+        <p id="display-path" style="color: #888; font-size: 0.8em; font-family: monospace;"></p>
     </div>
 
-    <div id="table-container" style="padding: 20px; overflow-x: auto;">
-        <p id="loading-status">Initialisation du chargement...</p>
-    </div>
+    <div id="table-container" style="padding: 20px; overflow-x: auto;"></div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8; margin-top: 50px;">
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8;">
         <p>Base de données créée par <strong id="display-author">...</strong></p>
-        
         <div style="margin: 20px 0;">
             <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
             <script type='text/javascript'>
-                kofiwidget2.init('Soutenir DataVault', '#5553ff', 'T6T117BAZT');
+                kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
                 kofiwidget2.draw();
             </script>
         </div>
-
-        <p style="color: #bbb; font-size: 0.9em;">
-            Données de <span id="display-owner">...</span> &copy; Tous droits réservés.
-        </p>
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+        <p style="color: #bbb;">Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
     </footer>
 
     <script>
         async function loadCSV() {
-            const container = document.getElementById('table-container');
-            const status = document.getElementById('loading-status');
+            const params = new URLSearchParams(window.location.search);
+            const path = params.get('file');
             
+            if(!path) return;
+
+            document.getElementById('display-alias').textContent = params.get('alias') || "Fichier";
+            document.getElementById('display-path').textContent = path;
+            document.getElementById('display-author').textContent = params.get('author') || "Admin";
+            document.getElementById('display-owner').textContent = params.get('owner') || "l'auteur";
+            document.getElementById('download-btn').href = path;
+
             try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const filePath = urlParams.get('file');
-                
-                if (!filePath) {
-                    status.innerHTML = "<b style='color:red;'>Erreur : Aucun chemin de fichier spécifié dans l'URL.</b>";
-                    return;
-                }
-
-                // Affichage des textes
-                document.getElementById('display-alias').textContent = urlParams.get('alias') || "Fichier";
-                document.getElementById('display-path').textContent = filePath;
-                document.getElementById('display-owner').textContent = urlParams.get('owner') || "l'auteur";
-                document.getElementById('display-author').textContent = urlParams.get('author') || "Admin";
-                document.getElementById('download-btn').href = filePath;
-
-                status.textContent = "Tentative de récupération du fichier : " + filePath + "...";
-
-                const response = await fetch(filePath);
-                
-                if (!response.ok) {
-                    throw new Error("Le fichier est introuvable au chemin indiqué (Erreur " + response.status + "). Vérifiez que le fichier est bien sur GitHub.");
-                }
-
-                // Date de modif
-                const lastMod = response.headers.get('Last-Modified');
-                if (lastMod) {
-                    document.getElementById('last-modified').textContent = "Dernière mise à jour : " + new Date(lastMod).toLocaleDateString('fr-FR');
-                }
-
+                const response = await fetch(path);
+                if (!response.ok) throw new Error();
                 const text = await response.text();
                 const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
                 
-                if (rows.length === 0) {
-                    status.textContent = "Le fichier CSV est vide.";
-                    return;
-                }
-
-                // Construction du tableau
                 let html = '<table><thead><tr>';
-                const headers = parseCSVLine(rows[0]);
-                headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
+                const headers = parseLine(rows[0]);
+                headers.forEach(h => html += `<th>${h.trim()}</th>`);
                 html += '</tr></thead><tbody>';
 
                 rows.slice(1).forEach(row => {
-                    const cells = parseCSVLine(row);
+                    const cells = parseLine(row);
                     html += '<tr>';
-                    cells.forEach(c => {
-                        let val = c.trim().replace(/^"|"$/g, '').replace(/\s{2,}/g, ', ');
-                        html += `<td>${val}</td>`;
-                    });
+                    cells.forEach(c => html += `<td>${c.replace(/^"|"$/g, '')}</td>`);
                     html += '</tr>';
                 });
-                html += '</tbody></table>';
-                
-                container.innerHTML = html;
-
-            } catch (err) {
-                console.error(err);
-                container.innerHTML = `
-                    <div style="background: #fff5f5; border: 1px solid #feb2b2; padding: 20px; border-radius: 8px; color: #c53030;">
-                        <h3 style="margin-top:0;">Échec du chargement</h3>
-                        <p>${err.message}</p>
-                        <p style="font-size:0.9em; color:#666;">Conseil : Vérifiez que le dossier <b>database/</b> et votre fichier CSV sont bien présents sur votre dépôt GitHub.</p>
-                    </div>
-                `;
+                document.getElementById('table-container').innerHTML = html + '</tbody></table>';
+            } catch (e) {
+                document.getElementById('table-container').innerHTML = "Erreur de chargement.";
             }
         }
 
-        function parseCSVLine(line) {
+        function parseLine(line) {
             const result = [];
             let curr = '', inQ = false;
             for (let char of line) {
@@ -128,7 +77,6 @@
             result.push(curr);
             return result;
         }
-
         loadCSV();
     </script>
 </body>
