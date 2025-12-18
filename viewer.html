@@ -6,7 +6,6 @@
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Style pour les images dans les cellules sans casser le reste */
         .cell-image {
             max-width: 50px;
             max-height: 50px;
@@ -14,15 +13,15 @@
             display: block;
             margin: auto;
         }
-        /* Style pour les tags (conservé) */
         .tag-pill {
             display: inline-block;
-            background: #f0f0f0;
+            background: var(--tag-pill-bg);
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.9em;
-            color: #555;
-            border: 1px solid #e0e0e0;
+            color: var(--tag-pill-text);
+            border: 1px solid var(--border-color);
+            margin: 2px;
         }
     </style>
 </head>
@@ -56,7 +55,7 @@
             </script>
         </div>
         
-        <p id="display-image-author-container" style="display:none;">Images provenant de: <strong id="display-image-author"></strong></p>
+        <p id="display-image-author-container" style="display:none;">Images propro par : <strong id="display-image-author"></strong></p>
         <p>Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
     </footer>
 
@@ -70,20 +69,15 @@
 
                 if (!filePath) throw new Error("Aucun fichier spécifié.");
 
-                document.getElementById('display-alias').textContent = urlParams.get('alias');
+                document.getElementById('display-alias').textContent = urlParams.get('alias') || "Fichier";
                 document.getElementById('display-path').textContent = filePath;
-                document.getElementById('display-owner').textContent = urlParams.get('owner');
-                document.getElementById('display-author').textContent = urlParams.get('author');
+                document.getElementById('display-owner').textContent = urlParams.get('owner') || "Inconnu";
+                document.getElementById('display-author').textContent = urlParams.get('author') || "Anonyme";
                 document.getElementById('download-btn').href = filePath;
 
-                // LOGIQUE DE L'AUTEUR D'IMAGE
                 if (imageAuthor && imageAuthor !== "" && imageAuthor !== "null" && imageAuthor !== "undefined") {
-                    const authorElement = document.getElementById('display-image-author');
-                    const containerElement = document.getElementById('display-image-author-container');
-                    if (authorElement && containerElement) {
-                        authorElement.textContent = imageAuthor;
-                        containerElement.style.display = 'block';
-                    }
+                    document.getElementById('display-image-author').textContent = imageAuthor;
+                    document.getElementById('display-image-author-container').style.display = 'block';
                 }
 
                 const response = await fetch(filePath);
@@ -94,28 +88,25 @@
                 
                 let html = '<table><thead><tr>';
                 const headers = parseCSVLine(rows[0]);
-                headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
+                headers.forEach(h => html += `<th>${h}</th>`);
                 html += '</tr></thead><tbody>';
 
                 rows.slice(1).forEach(row => {
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(val => {
-                        // 1. On nettoie tout : espaces insécables, retours à la ligne cachés, guillemets
+                        // Nettoyage de la valeur (caractères invisibles et guillemets)
                         let cleanVal = val.trim().replace(/^"|"$/g, '').replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
                         
-                        // 2. Détection d'URL d'image
-                        const isImgUrl = cleanVal.startsWith('http') && (
-                            cleanVal.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) || 
-                            cleanVal.includes("static.wikia.nocookie.net")
-                        );
-    
+                        // Détection Image
+                        const isImgUrl = cleanVal.startsWith('http') && (cleanVal.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) || cleanVal.includes("static.wikia.nocookie.net"));
+
                         if (isImgUrl) {
-                            // 3. On utilise l'URL propre avec referrerpolicy pour bypasser les protections Wikia
-                            html += `<td><img src="${cleanVal}" class="cell-image" referrerpolicy="no-referrer" loading="lazy"></td>`;
-                        } else if (/\s{2,}/.test(cleanVal)) {
-                            const tags = cleanVal.replace(/\s{2,}/g, ', ');
-                            html += `<td><span class="tag-pill">${tags}</span></td>`;
+                            html += `<td><img src="${cleanVal}" class="cell-image" referrerpolicy="no-referrer" onerror="this.style.display='none'"></td>`;
+                        } else if (cleanVal.includes(',')) {
+                            // Si la cellule contient une virgule (tes tags a, b, c), on crée des petits badges
+                            const tags = cleanVal.split(',').map(t => `<span class="tag-pill">${t.trim()}</span>`).join('');
+                            html += `<td>${tags}</td>`;
                         } else {
                             html += `<td>${cleanVal}</td>`;
                         }
@@ -131,21 +122,29 @@
             }
         }
 
+        // LE CERVEAU DU CODE : Ce parser ignore les virgules à l'intérieur des guillemets
         function parseCSVLine(line) {
             const result = [];
-            let curr = '', inQ = false;
-            for (let char of line) {
-                if (char === '"') inQ = !inQ;
-                else if (char === ',' && !inQ) { result.push(curr); curr = ''; }
-                else curr += char;
+            let curValue = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(curValue.trim().replace(/^"|"$/g, ''));
+                    curValue = '';
+                } else {
+                    curValue += char;
+                }
             }
-            result.push(curr);
+            result.push(curValue.trim().replace(/^"|"$/g, ''));
             return result;
         }
 
         loadCSV();
 
-        // LOGIQUE DARK MODE
         const btn = document.getElementById('theme-toggle');
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
@@ -160,8 +159,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
