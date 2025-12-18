@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
     <h1>DataVault</h1>
-    
     <div class="search-container">
         <form id="search-form" autocomplete="off">
             <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)...">
@@ -17,22 +15,24 @@
         </form>
         <div id="suggestions" class="suggestions-box"></div>
     </div>
-
     <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 100px; font-size: 0.8em; color: #888;">
         <p>&copy; 2025 DataVault &bull; <a href="legale.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
     </footer>
 
     <script>
         let availableFiles = [];
+        const searchInput = document.getElementById('site-search');
+        const suggestionsBox = document.getElementById('suggestions');
+        const searchForm = document.getElementById('search-form');
 
-        // CHARGEMENT DU BACKEND JSON
         async function initData() {
             try {
-                const response = await fetch('registry.json');
-                if (!response.ok) throw new Error("Fichier registry.json introuvable");
+                // On force le chemin relatif avec ./ pour éviter le failure sur GitHub
+                const response = await fetch('./registry.json');
+                if (!response.ok) throw new Error("Registre introuvable");
                 availableFiles = await response.json();
             } catch (err) {
-                console.error("Erreur de chargement du registre :", err);
+                console.error("Erreur Backend:", err);
             }
         }
 
@@ -50,13 +50,12 @@
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
             if (val.length < 1) { suggestionsBox.style.display = 'none'; return; }
-
             const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
-
             if (matches.length > 0) {
                 matches.forEach(file => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
+                    div.style.cursor = 'pointer';
                     div.innerHTML = `<strong>${file.alias}</strong>`;
                     div.addEventListener('click', () => {
                         searchInput.value = file.alias;
@@ -71,9 +70,9 @@
             }
         });
 
-        document.getElementById('search-form').addEventListener('submit', (e) => {
+        searchForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const val = document.getElementById('site-search').value.trim().toLowerCase();
+            const val = searchInput.value.trim().toLowerCase();
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
             if (found) goToViewer(found);
             else alert("Fichier non trouvé.");
