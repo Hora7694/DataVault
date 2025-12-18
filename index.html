@@ -11,83 +11,69 @@
     
     <div class="search-container">
         <form id="search-form" autocomplete="off">
-            <input type="search" id="site-search" placeholder="Rechercher un fichier (ex: Yo-kai Watch)...">
+            <input type="search" id="site-search" placeholder="Rechercher un fichier...">
             <button type="submit">Afficher</button>
         </form>
         <div id="suggestions" class="suggestions-box"></div>
     </div>
 
+    <footer style="text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 1px solid #eee; color: #888; font-size: 0.85em;">
+        <p>Plateforme de données <strong>DataVault</strong></p>
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Droits d'auteur</a></p>
+    </footer>
+
     <script>
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2 - Liste des Yo-kai", 
-                path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv" 
+                path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
+                owner: "LEVEL-5 Inc." 
             }
         ];
-    
+
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
-    
-        searchInput.addEventListener('input', function() {
-            const val = this.value.toLowerCase();
+
+        searchInput.addEventListener('input', () => {
+            const val = searchInput.value.toLowerCase();
             suggestionsBox.innerHTML = '';
-    
-            if (!val) {
-                suggestionsBox.style.display = 'none';
-                return;
-            }
-    
+            if (!val) { suggestionsBox.style.display = 'none'; return; }
+
             const matches = availableFiles.filter(f => 
-                f.alias.toLowerCase().includes(val) || 
-                f.path.toLowerCase().includes(val)
+                f.alias.toLowerCase().includes(val) || f.path.toLowerCase().includes(val)
             );
-    
-            if (matches.length > 0) {
-                matches.forEach(file => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    div.innerHTML = '<span class="alias-name">' + file.alias + '</span>' +
-                                    '<span class="path-hint">' + file.path + '</span>';
-                    
-                    div.onclick = function() {
-                        searchInput.value = file.alias;
-                        searchInput.setAttribute('data-path', file.path);
-                        suggestionsBox.style.display = 'none';
-                    };
-                    suggestionsBox.appendChild(div);
-                });
-                suggestionsBox.style.display = 'block';
-            } else {
-                suggestionsBox.style.display = 'none';
-            }
+
+            matches.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `<strong>${file.alias}</strong><br><small>${file.path}</small>`;
+                div.onclick = () => {
+                    searchInput.value = file.alias;
+                    searchInput.setAttribute('data-path', file.path);
+                    searchInput.setAttribute('data-owner', file.owner);
+                    suggestionsBox.style.display = 'none';
+                };
+                suggestionsBox.appendChild(div);
+            });
+            suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
-    
-        document.getElementById('search-form').onsubmit = function(e) {
+
+        document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
             const alias = searchInput.value;
             let path = searchInput.getAttribute('data-path');
-    
+            let owner = searchInput.getAttribute('data-owner');
+
             if (!path) {
                 const found = availableFiles.find(f => f.alias === alias);
-                if (found) path = found.path;
+                if (found) { path = found.path; owner = found.owner; }
             }
-    
+
             if (path) {
-                // Redirection après avoir cliqué sur OK
-                const url = 'viewer.html?file=' + encodeURIComponent(path) + '&alias=' + encodeURIComponent(alias);
-                window.location.href = url;
-            } else {
-                alert("Fichier non trouvé. Veuillez sélectionner une suggestion.");
+                alert("Ouverture du fichier : " + path);
+                window.location.href = `viewer.html?file=${encodeURIComponent(path)}&alias=${encodeURIComponent(alias)}&owner=${encodeURIComponent(owner || 'X')}`;
             }
         };
-    
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-container')) {
-                suggestionsBox.style.display = 'none';
-            }
-        });
     </script>
 </body>
 </html>
-
-
