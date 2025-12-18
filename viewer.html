@@ -101,13 +101,17 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(c => {
-                        let val = c.trim().replace(/^"|"$/g, '');
+                        // Nettoyage strict des guillemets et espaces
+                        let val = c.trim().replace(/^"|"$/g, '').trim();
                         
-                        // DETECTION D'IMAGE (Vérifie si c'est un lien d'image)
-                        const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || val.includes("static.wikia.nocookie.net");
+                        // Détection d'URL d'image
+                        const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || 
+                                         val.includes("static.wikia.nocookie.net") || 
+                                         val.includes("images.wikia.com");
 
                         if (val.startsWith('http') && isImgUrl) {
-                            html += `<td><img src="${val}" class="cell-image"></td>`;
+                            // On force l'URL propre dans le src
+                            html += `<td><img src="${val}" class="cell-image" onerror="this.style.display='none'"></td>`;
                         } else if (/\s{2,}/.test(val)) {
                             val = val.replace(/\s{2,}/g, ', ');
                             html += `<td><span class="tag-pill">${val}</span></td>`;
@@ -155,5 +159,6 @@
     </script>
 </body>
 </html>
+
 
 
