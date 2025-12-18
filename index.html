@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <title>DataVault - Recherche</title>
+</head>
+<body>
+    <h1>DataVault</h1>
+    <div class="search-container">
+        <form id="search-form" autocomplete="off">
+            <input type="search" id="site-search" placeholder="Rechercher un fichier...">
+            <button type="submit">Afficher</button>
+        </form>
+        <div id="suggestions" class="suggestions-box"></div>
+    </div>
+
+    <script>
+        // Ta liste de fichiers (à compléter)
+        const availableFiles = [
+            { alias: "Yo-kai Watch 2 - Liste", path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv" }
+        ];
+
+        const searchInput = document.getElementById('site-search');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        function updateSuggestions() {
+            const val = searchInput.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val) || f.path.toLowerCase().includes(val));
+
+            if (matches.length > 0) {
+                matches.forEach(file => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.innerHTML = `<span class="alias-name">${file.alias}</span><span class="path-hint">${file.path}</span>`;
+                    div.onclick = () => {
+                        searchInput.value = file.path;
+                        suggestionsBox.style.display = 'none';
+                    };
+                    suggestionsBox.appendChild(div);
+                });
+                suggestionsBox.style.display = 'block';
+            }
+        }
+
+        searchInput.addEventListener('input', updateSuggestions);
+        searchInput.addEventListener('focus', updateSuggestions);
+
+        document.getElementById('search-form').onsubmit = (e) => {
+            e.preventDefault();
+            const path = searchInput.value;
+            if (path) {
+                // Redirige vers la page d'affichage avec le chemin
+                window.location.href = `viewer.html?file=${encodeURIComponent(path)}`;
+            }
+        };
+    </script>
+</body>
+</html>

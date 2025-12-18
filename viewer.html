@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualiseur DataVault</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div style="padding: 20px;">
+        <button onclick="window.history.back()" style="margin-bottom: 20px; padding: 10px 20px; border-radius: 20px; cursor: pointer;">← Retour</button>
+        <h2 id="file-title">Chargement des données...</h2>
+    </div>
+
+    <div id="table-container"></div>
+
+    <script>
+        async function loadCSV() {
+            const params = new URLSearchParams(window.location.search);
+            const filePath = params.get('file');
+            
+            if (!filePath) {
+                document.getElementById('file-title').textContent = "Erreur : Aucun fichier spécifié.";
+                return;
+            }
+
+            document.getElementById('file-title').textContent = "Fichier : " + filePath;
+
+            try {
+                // FETCH AUTOMATIQUE (Fonctionne sur GitHub Pages)
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error("Fichier introuvable");
+                
+                const text = await response.text();
+                const rows = text.split('\n').filter(r => r.trim() !== '');
+                
+                let html = '<table><thead><tr>';
+                // Headers
+                rows[0].split(',').forEach(h => html += `<th>${h.trim()}</th>`);
+                html += '</tr></thead><tbody>';
+
+                // Données
+                rows.slice(1).forEach(row => {
+                    html += '<tr>';
+                    row.split(',').forEach(cell => html += `<td>${cell.trim()}</td>`);
+                    html += '</tr>';
+                });
+                html += '</tbody></table>';
+                
+                document.getElementById('table-container').innerHTML = html;
+            } catch (error) {
+                document.getElementById('file-title').innerHTML = `
+                    <div style="color: red;">
+                        Impossible d'afficher le fichier automatiquement en local.<br>
+                        <small>C'est normal : ce code est fait pour <strong>GitHub Pages</strong>.</small>
+                    </div>`;
+            }
+        }
+
+        loadCSV();
+    </script>
+</body>
+</html>
