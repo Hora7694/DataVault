@@ -6,7 +6,14 @@
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Style pour améliorer l'apparence des tags transformés */
+        /* Style pour les images dans le tableau */
+        .cell-image {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 4px;
+            display: block;
+            margin: auto;
+        }
         .tag-pill {
             display: inline-block;
             background: #f0f0f0;
@@ -33,73 +40,45 @@
             </a>
         </div>
         <p id="display-path" style="color: #888; font-size: 0.85em; margin-top: 5px; font-family: monospace;"></p>
-        <p id="last-modified" style="font-size: 0.8em; color: #aaa; margin-top: 5px;"></p>
     </div>
 
-    <div id="table-container" style="padding: 20px; overflow-x: auto;">
-        <p id="loading-status">Initialisation du chargement...</p>
-    </div>
+    <div id="table-container" style="overflow-x: auto;"></div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8; margin-top: 50px;">
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888;">
         <p>Base de données créée par <strong id="display-author">...</strong></p>
-        
-        <div style="margin: 20px 0;">
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-            <script type='text/javascript'>
-                kofiwidget2.init('Soutenir DataVault', '#5553ff', 'T6T117BAZT');
-                kofiwidget2.draw();
-            </script>
-        </div>
-
-        <p style="color: #bbb; font-size: 0.9em;">
-            Données de <span id="display-owner">...</span> &copy; Tous droits réservés.
-        </p>
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+        <p id="credit-image-container" style="display: none;">Images fournies par : <strong id="display-image-author"></strong></p>
+        <p>Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
     </footer>
 
     <script>
         async function loadCSV() {
             const container = document.getElementById('table-container');
-            const status = document.getElementById('loading-status');
-            
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const filePath = urlParams.get('file');
-                
-                if (!filePath) {
-                    status.innerHTML = "<b style='color:red;'>Erreur : Aucun chemin de fichier spécifié dans l'URL.</b>";
-                    return;
-                }
+                const imgAuthor = urlParams.get('image_author'); // Récupération du nouvel auteur image
 
-                // Affichage des textes informatifs
-                document.getElementById('display-alias').textContent = urlParams.get('alias') || "Fichier";
+                if (!filePath) throw new Error("Aucun fichier spécifié.");
+
+                document.getElementById('display-alias').textContent = urlParams.get('alias');
                 document.getElementById('display-path').textContent = filePath;
-                document.getElementById('display-owner').textContent = urlParams.get('owner') || "l'auteur";
-                document.getElementById('display-author').textContent = urlParams.get('author') || "Admin";
+                document.getElementById('display-owner').textContent = urlParams.get('owner');
+                document.getElementById('display-author').textContent = urlParams.get('author');
                 document.getElementById('download-btn').href = filePath;
 
-                status.textContent = "Chargement des données...";
+                // Affichage du crédit image si présent
+                if (imgAuthor && imgAuthor !== "undefined" && imgAuthor.trim() !== "") {
+                    const creditContainer = document.getElementById('credit-image-container');
+                    document.getElementById('display-image-author').textContent = imgAuthor;
+                    creditContainer.style.display = 'block';
+                }
 
                 const response = await fetch(filePath);
-                
-                if (!response.ok) {
-                    throw new Error("Erreur " + response.status + " : Impossible de récupérer le fichier.");
-                }
-
-                const lastMod = response.headers.get('Last-Modified');
-                if (lastMod) {
-                    document.getElementById('last-modified').textContent = "Dernière mise à jour : " + new Date(lastMod).toLocaleDateString('fr-FR');
-                }
+                if (!response.ok) throw new Error("Fichier introuvable.");
 
                 const text = await response.text();
-                const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
+                const rows = text.split(/\r?\n/).filter(row => row.trim() !== '');
                 
-                if (rows.length === 0) {
-                    status.textContent = "Le fichier CSV est vide.";
-                    return;
-                }
-
-                // Construction du tableau
                 let html = '<table><thead><tr>';
                 const headers = parseCSVLine(rows[0]);
                 headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
@@ -109,12 +88,16 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(c => {
-                        // 1. Nettoyage des guillemets
                         let val = c.trim().replace(/^"|"$/g, '');
                         
-                        // 2. MODIFICATION : Remplace 2+ espaces par une virgule et un espace
-                        // On vérifie si la valeur contient ces espaces pour appliquer le style "tag"
-                        if (/\s{2,}/.test(val)) {
+                        // DETECTION D'IMAGE
+                        const isImage = (url) => {
+                            return url.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || url.includes("static.wikia.nocookie.net");
+                        };
+
+                        if (val.startsWith('http') && isImage(val)) {
+                            html += `<td><img src="${val}" class="cell-image" alt="icon"></td>`;
+                        } else if (/\s{2,}/.test(val)) {
                             val = val.replace(/\s{2,}/g, ', ');
                             html += `<td><span class="tag-pill">${val}</span></td>`;
                         } else {
@@ -124,17 +107,11 @@
                     html += '</tr>';
                 });
                 html += '</tbody></table>';
-                
                 container.innerHTML = html;
 
             } catch (err) {
                 console.error(err);
-                container.innerHTML = `
-                    <div style="background: #fff5f5; border: 1px solid #feb2b2; padding: 20px; border-radius: 8px; color: #c53030;">
-                        <h3 style="margin-top:0;">Échec du chargement</h3>
-                        <p>${err.message}</p>
-                    </div>
-                `;
+                container.innerHTML = `<p style="color:red; text-align:center;">Erreur: ${err.message}</p>`;
             }
         }
 
@@ -152,6 +129,7 @@
 
         loadCSV();
 
+        // Dark Mode Logic
         const btn = document.getElementById('theme-toggle');
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
@@ -166,4 +144,3 @@
     </script>
 </body>
 </html>
-
