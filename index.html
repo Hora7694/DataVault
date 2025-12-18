@@ -18,29 +18,28 @@
     </div>
 
     <script>
+        // LISTE DES FICHIERS
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2 - Liste des Yo-kai", 
                 path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv" 
-            },
-            { 
-                alias: "Items de soin - YKW2", 
-                path: "database/game/nintendo/yo_kai_watch/ykw2/items.csv" 
             }
         ];
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
 
+        // Met à jour les suggestions
         function updateSuggestions() {
             const val = searchInput.value.toLowerCase();
             suggestionsBox.innerHTML = '';
 
-            const matches = availableFiles
-                .filter(f => f.alias.toLowerCase().includes(val) || f.path.toLowerCase().includes(val))
-                .slice(0, 10);
+            const matches = availableFiles.filter(f => 
+                f.alias.toLowerCase().includes(val) || 
+                f.path.toLowerCase().includes(val)
+            );
 
-            if (matches.length > 0) {
+            if (matches.length > 0 && val !== '') {
                 matches.forEach(file => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
@@ -48,36 +47,43 @@
                         <span class="alias-name">${file.alias}</span>
                         <span class="path-hint">${file.path}</span>
                     `;
-
                     div.onclick = () => {
-                        // On stocke l'objet sélectionné pour envoyer les deux infos
                         searchInput.value = file.alias;
-                        searchInput.dataset.path = file.path;
+                        // On attache le chemin directement à l'élément pour le récupérer au submit
+                        searchInput.setAttribute('data-selected-path', file.path);
                         suggestionsBox.style.display = 'none';
                     };
                     suggestionsBox.appendChild(div);
                 });
                 suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
             }
         }
 
-        searchInput.addEventListener('focus', updateSuggestions);
         searchInput.addEventListener('input', updateSuggestions);
 
+        // Fermer les suggestions si on clique ailleurs
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 suggestionsBox.style.display = 'none';
             }
         });
 
+        // Envoi vers viewer.html
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
             const alias = searchInput.value;
-            // On retrouve le chemin correspondant à l'alias
-            const file = availableFiles.find(f => f.alias === alias) || { alias: alias, path: searchInput.dataset.path };
+            const path = searchInput.getAttribute('data-selected-path');
             
-            if(file.path) {
-                window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}`;
+            if (path) {
+                window.location.href = `viewer.html?file=${encodeURIComponent(path)}&alias=${encodeURIComponent(alias)}`;
+            } else {
+                // Si l'utilisateur tape manuellement sans cliquer sur une suggestion
+                const file = availableFiles.find(f => f.alias === alias);
+                if (file) {
+                    window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}`;
+                }
             }
         };
     </script>
