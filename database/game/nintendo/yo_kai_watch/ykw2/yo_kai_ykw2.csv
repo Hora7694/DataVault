@@ -1,0 +1,229 @@
+N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
+001,Woko,,Vaillant,E,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
+002,Pagno,,Vaillant,C,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+003,Alfoncéo,,Vaillant,B,Terre,Boule de Riz,Combattant,Rare,Aucun,Aucun,YKW1
+004,Toumou,,Vaillant,E,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
+005,Lamlam'mou,,Vaillant,C,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+006,Samoumouraï,,Vaillant,B,Glace,Jus,Combattant,Rare,Aucun,Aucun,YKW1
+007,Samoussrai,,Vaillant,E,Glace,Déssert,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
+008,Ronimpec,,Vaillant,B,Glace,Déssert,Guérisseur,Commun,Aucun,Aucun,"YKW2, Évolution, Tabloblabla"
+009,Roupilion,,Vaillant,E,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
+010,Rugis,,Vaillant,A,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution"
+011,Trépigno,,Vaillant,E,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusion (Objet)"
+012,Zerberker,,Vaillant,A,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Objet)"
+013,Fouétar,,Vaillant,S,Glace,Viande,Combattant,Rare,Aucun,Aucun,YKW1
+014,Sumochi,,Vaillant,D,Terre,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Tabloblabla"
+015,Mochimacho,,Vaillant,D,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,YKW1
+016,Sale de bain,,Vaillant,D,Foudre,Oden,Combattant,Commun,Aucun,Classique,YKW2
+017,Agonigri,,Vaillant,D,Restauration,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif, Réa"
+018,Onigrix,,Vaillant,A,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution, Réa"
+019,Heaumer,,Vaillant,D,Foudre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+020,Bushidos,,Vaillant,A,Foudre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+021,Âmiral,,Vaillant,S,Absorption,Légumes,Combattant,Rare,Aucun,Aucun,YKW1
+022,Bouh,,Vaillant,C,Terre,Oden,Tank,Commun,Aucun,Classique,YKW2
+023,Coach Antonic,,Vaillant,C,Foudre,Hamburger,Ranger,Commun,Aucun,Aucun,"YKW2, Tabloblabla"
+024,Feulion,,Vaillant,C,Feu,Viande,Ranger,Commun,Aucun,Aucun,"YKW1, Sceau Lég."
+025,Vibrilion,,Vaillant,B,Terre,Viande,Combattant,Commun,Aucun,Aucun,YKW1
+026,Siro,,Vaillant,A,Foudre,Viande,Combattant,Rare,Aucun,Aucun,YKW1
+027,Bonneto,,Vaillant,C,Feu,Fruit de mer,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+028,Sabri,,Vaillant,A,Vent,Fruit de mer,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+029,Padelou,,Vaillant,A,Absorption,Fruit de mer,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+030,Orox,,Vaillant,S,Foudre,Fruit de mer,Combattant,Rare,Aucun,Aucun,YKW1
+031,Benkei,,Vaillant,C,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+032,B3-NK1,,Vaillant,B,Foudre,Cuisine Chinoise,Ranger,Commun,Aucun,Aucun,YKW1
+033,Sushiyama,,Vaillant,B,Glace,Soba,Combattant,Commun,Aucun,Aucun,YKW1
+034,Kapunki,,Vaillant,A,Feu,Soba,Combattant,Rare,Aucun,Aucun,YKW1
+035,Scatcheur,,Vaillant,B,Terre,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet), Voie du mystère, Réa"
+036,Scarmouche,,Vaillant,S,Glace,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet), Réa"
+037,Scarnage,,Vaillant,S,Foudre,Légumes,Ranger,Rare,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég., Sceau Gorgouille"
+038,Démophage,,Vaillant,S,Terre,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Sceau Lég., Sceau Déballerine"
+039,Vampéric,,Vaillant,S,Absorption,Confiserie,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+040,Pleurapluie,,Mystérieux,E,Vent,Encas,Combattant,Commun,Aucun,Aucun,YKW2
+041,Gastong,,Mystérieux,E,Terre,Encas,Combattant,Commun,Aucun,Classique,YKW2
+042,Morvobec,,Mystérieux,E,Eau,Fruit de mer,Combattant,Commun,Aucun,Aucun,YKW1
+043,Matchou,,Mystérieux,D,Glace,Fruit de mer,Combattant,Commun,Aucun,Aucun,YKW1
+044,Papa Ress,,Mystérieux,E,Restauration,Hamburger,Guérisseur,Commun,Aucun,Aucun,"YKW1, Évolutif"
+045,Ralbouc,,Mystérieux,C,Restauration,Hamburger,Guérisseur,Commun,Aucun,Aucun,"YKW1, Évolution"
+046,Bastata,,Mystérieux,C,Terre,Hamburger,Combattant,Rare,Aucun,Aucun,YKW1
+047,Chaipô,,Mystérieux,E,Vent,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif, Tabloblabla"
+048,Mémogre,,Mystérieux,B,Vent,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution"
+049,Gagalurin,,Mystérieux,E,Foudre,Confiserie,Combattant,Commun,Aucun,Aucun,YKW1
+050,Ovide,,Mystérieux,D,Eau,Oden,Combattant,Commun,Esprit Farsseur,Classique,YKW2
+051,Marra,,Mystérieux,D,Absorption,Hamburger,Combattant,Commun,Aucun,Aucun,YKW1
+052,Violette,,Mystérieux,C,Absorption,Hamburger,Combattant,Commun,Aucun,Aucun,YKW1
+053,Toutouïe,,Mystérieux,D,Restauration,Ramen,Guérisseur,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Pièce Pile ou Pass, Évolutif"
+054,Babalance,,Mystérieux,B,Restauration,Ramen,Guérisseur,Commun,Aucun,Aucun,"YKW1, Évolution"
+055,Mémétal,,Mystérieux,C,Restauration,Ramen,Guérisseur,Commun,Aucun,Aucun,YKW1
+056,Cupistol,,Mystérieux,D,Vent,Déssert,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+057,Donjuant,,Mystérieux,B,Vent,Déssert,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet), Âmeschimie rares, Âme Superstar"
+058,Nonjuan,,Mystérieux,A,Feu,Déssert,Combattant,Rare,Aucun,Aucun,YKW1
+059,Trodésolé,,Mystérieux,D,Foudre,Curry,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Évolutif"
+060,Pardomino,,Mystérieux,A,Terre,Curry,Combattant,Rare,Aucun,Aucun,"YKW2, Évolution"
+061,Brumette,,Mystérieux,D,Vent,Déssert,Combattant,Commun,Aucun,Classique,"YKW2, Évolutif"
+062,Brumella,,Mystérieux,A,Vent,Déssert,Combattant,Commun,Aucun,Classique,"YKW2, Évolution, Sceau Lég., Sceau Déballerine"
+063,Padrézo,,Mystérieux,D,Foudre,Encas,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+064,Emettor,,Mystérieux,A,Foudre,Oden,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+065,Dynamo,,Mystérieux,S,Foudre,Oden,Combattant,Rare,Aucun,Aucun,"YKW1, Sceau Lég., Sceau Camaïeul"
+066,Maître Oden,,Mystérieux,A,Foudre,Oden,Guérisseur,Rare,Aucun,Aucun,YKW2
+067,Mythovni,,Mystérieux,C,Glace,Sushi,Combattant,Commun,Esprit Farsseur,Aucun,YKW2
+068,Apélicain,,Mystérieux,C,Vent,Hamburger,Combattant,Commun,Aucun,Aucun,"YKW2, Exclu Bingo-Kai"
+069,Télémir,,Mystérieux,C,Absorption,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+070,Triptic-tac,,Mystérieux,A,Absorption,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Sceau Lég., Sceau Déballerine"
+071,Nuiroir,,Mystérieux,A,Absorption,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+072,Hiblusion,,Mystérieux,C,Eau,Pain,Combattant,Commun,Aucun,Aucun,YKW1
+073,Hibrouille,,Mystérieux,C,Glace,Pain,Combattant,Commun,Aucun,Aucun,YKW1
+074,Hibourling,,Mystérieux,B,Foudre,Pain,Combattant,Commun,Aucun,Aucun,YKW1
+075,Espi,,Mystérieux,B,Terre,Légumes,Combattant,Commun,Aucun,Aucun,YKW1
+076,Etassivilia,,Mystérieux,B,Absorption,Légumes,Combattant,Commun,Aucun,Aucun,YKW1
+077,Valetino,,Mystérieux,B,Restauration,Soba,Guérisseur,Commun,Aucun,Aucun,YKW2
+078,Tengu,,Mystérieux,S,Vent,Confiserie,Combattant,Commun,Aucun,Aucun,YKW1
+079,Tengurou,,Mystérieux,S,Feu,Confiserie,Combattant,Rare,Aucun,Aucun,YKW1
+080,Kyubi,,Mystérieux,S,Feu,Oden,Combattant,Commun,Fantôme Bouffis,Aucun,YKW1
+081,Barakabo,,Mystérieux,S,Glace,Oden,Combattant,Rare,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég., Sceau Gorgouille"
+082,Chymère,,Mystérieux,S,Foudre,Cuisine Chinoise,Combattant,Commun,Aucun,Classique,"YKW2, Limbes Éternelles"
+083,Chyper,,Mystérieux,S,Foudre,Sushi,Combattant,Rare,Aucun,Classique,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+084,Potache,,Costaud,E,Terre,Encas,Combattant,Commun,Aucun,Aucun,YKW2
+085,Darabajoie,,Costaud,E,Terre,Curry,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+086,Darumastar,,Costaud,B,Terre,Curry,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+087,Goruma,,Costaud,B,Vent,Curry,Tank,Commun,Aucun,Aucun,YKW1
+088,Jalouseriz,,Costaud,E,Glace,Cuisine Chinoise,Tank,Commun,Fantôme Bouffis,Aucun,"YKW2, Fusion, Fusion (Yo-Kai)"
+089,Fanfanfaron,,Costaud,B,Restauration,Fruit de mer,Tank,Commun,Fantôme Bouffis,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+090,Egare-dare,,Costaud,E,Terre,Boule de Riz,Combattant,Commun,Esprit Farsseur,Aucun,"YKW2, Fusion, Fusion (Yo-Kai)"
+091,Charivari,,Costaud,B,Terre,Boule de Riz,Tank,Commun,Esprit Farsseur,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+092,Nanpart,,Costaud,E,Terre,Ramen,Tank,Commun,Aucun,Aucun,"YKW1, Évolutif, Voie du mystère, Réa"
+093,Passpa,,Costaud,A,Terre,Ramen,Tank,Commun,Aucun,Aucun,"YKW1, Évolution, Réa"
+094,Granpart,,Costaud,A,Terre,Ramen,Tank,Commun,Aucun,Aucun,YKW1
+095,Loubarbare,,Costaud,E,Terre,Ramen,Combattant,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Pièce Pile ou Pass, Évolutif"
+096,Racaïd,,Costaud,B,Terre,Ramen,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+097,Frérosse,,Costaud,A,Terre,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+098,Hauber,,Costaud,D,Glace,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+099,Humainequin,,Costaud,D,Glace,Confiserie,Combattant,Commun,Aucun,Aucun,YKW2
+100,Boulapic,,Costaud,D,Eau,Lait,Tank,Commun,Aucun,Aucun,YKW1
+101,Boulcadier,,Costaud,C,Eau,Lait,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+102,Pachycoul,,Costaud,D,Eau,Boule de Riz,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+103,Persévéfant,,Costaud,C,Eau,Boule de Riz,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+104,Pachypipi,,Costaud,A,Eau,Boule de Riz,Tank,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+105,Antonnerre,,Costaud,D,Foudre,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
+106,Parantonn,,Costaud,A,Foudre,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution, Sceau Lég."
+107,Suinthan,,Costaud,C,Feu,Curry,Tank,Commun,Aucun,Aucun,YKW2
+108,Lama Laya,,Costaud,C,Glace,Sushi,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+109,Etna Magma,,Costaud,B,,Sushi,Tank,Commun,Aucun,Aucun,YKW1
+110,Castelius III,,Costaud,C,Terre,Lait,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+111,Castelius II,,Costaud,B,Glace,Lait,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai), Fusion (Yo-Kai)"
+112,Castelius I,,Costaud,A,Foudre,Lait,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai), Fusion (Objet), Voie du mystère"
+113,Castelius MAX,,Costaud,S,Vent,Lait,Tank,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+114,Coléroptère,,Costaud,B,Terre,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet), Voie du mystère, Réa"
+115,Rhinolimit,,Costaud,S,Terre,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet), Réa"
+116,Corniaque,,Costaud,S,Terre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég."
+117,Robonyan,,Costaud,A,Glace,Barre de Chocolat,Tank,Commun,Aucun,Aucun,YKW1
+118,Oronyan,,Costaud,S,Foudre,Barre de Chocolat,Tank,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég."
+119,Misterre,,Costaud,A,Terre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Sceau Lég., Sceau Camaïeul"
+120,Ressak,,Costaud,S,Eau,Légumes,Tank,Commun,Aucun,Aucun,YKW1
+121,Crapop,,Costaud,S,Eau,Soba,Combattant,Commun,Fantôme Bouffis,Classique,"YKW2, Chef de Clan"
+122,Geeko,,Costaud,S,Feu,Soba,Combattant,Commun,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+123,Gambeth,,Mignon,E,Restauration,Déssert,Guérisseur,Commun,Aucun,Aucun,YKW2
+124,Squarlett,,Mignon,E,Feu,Déssert,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+125,Margoth,,Mignon,C,Feu,Déssert,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+126,Squelèbelle,,Mignon,B,Eau,Déssert,Combattant,Rare,Aucun,Aucun,YKW1
+127,Cigalopin,,Mignon,E,Vent,Jus,Ranger,Commun,Aucun,Aucun,YKW1
+128,Cigaillard,,Mignon,C,Vent,Jus,Ranger,Commun,Aucun,Aucun,YKW1
+129,Cigazouille,,Mignon,B,Feu,Jus,Ranger,Commun,Aucun,Aucun,YKW1
+130,Chihuaglagla,,Mignon,E,Glace,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+131,Froahuahua,,Mignon,A,Glace,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+132,Cho-cho,,Mignon,S,Feu,Ramen,Ranger,Commun,Aucun,Aucun,YKW1
+133,Traviolette,,Mignon,D,Glace,Déssert,Combattant,Commun,Aucun,Aucun,YKW2
+134,Yokoeil,,Mignon,D,Glace,Oden,Combattant,Commun,Aucun,Classique,YKW2
+135,Jibanyan,,Mignon,D,Feu,Barre de Chocolat,Combattant,Commun,Aucun,Aucun,YKW1
+136,Épinyan,,Mignon,B,Vent,Barre de Chocolat,Ranger,Commun,Aucun,Aucun,YKW1
+137,Bandinyan,,Mignon,B,Feu,Barre de Chocolat,Combattant,Commun,Aucun,Aucun,YKW1
+138,Buchinyan,,Mignon,C,Foudre,Barre de Chocolat,Ranger,Commun,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Pièce Super Pile ou Pass"
+139,Kappacap,,Mignon,D,Eau,Sushi,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif, Voie du mystère, Réa"
+140,Appak,,Mignon,A,Eau,Sushi,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution, Réa"
+141,Kappaloha,,Mignon,A,Eau,Sushi,Combattant,Commun,Aucun,Aucun,YKW1
+142,Komasan,,Mignon,D,Feu,Lait,Combattant,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Pièce Super Pile ou Pass, Évolutif"
+143,Komaous,,Mignon,A,Feu,Lait,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+144,Komajiro,,Mignon,D,Foudre,Lait,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif, Voie du mystère, Réa"
+145,Komistigri,,Mignon,A,Foudre,Lait,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution, Réa"
+146,Baku,,Mignon,D,Absorption,Jus,Combattant,Commun,Aucun,Aucun,
+147,Bakuku,,Mignon,B,Absorption,Jus,Combattant,Commun,Aucun,Aucun,
+148,Tapur,,Mignon,C,Absorption,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Réa"
+149,Sabruine,,Mignon,C,Eau,Jus,Combattant,Commun,Aucun,Aucun,"YKW2, Tabloblabla"
+150,Vito,,Mignon,C,Glace,Curry,Ranger,Commun,Aucun,Aucun,YKW2
+151,Pitou,,Mignon,C,Restauration,Hamburger,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+152,Choubidou,,Mignon,B,Restauration,Hamburger,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet), Âmeschimie rares, Âme Superstar"
+153,Satandre,,Mignon,A,Absorption,Hamburger,Combattant,Commun,Aucun,Aucun,YKW1
+154,Timours,,Mignon,B,Restauration,Viande,Ranger,Commun,Aucun,Aucun,YKW2
+155,Angélik,,Mignon,B,Glace,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+156,Blizzaria,,Mignon,A,Glace,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+157,Damona,,Mignon,S,Absorption,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég., Sceau Gorgouille"
+158,Faux Kappa,,Mignon,A,Eau,Légumes,Combattant,Commun,Aucun,Classique,"YKW2, Sceau Lég., Sceau Déballerine"
+159,Kappadissi,,Mignon,S,Eau,Cuisine Chinoise,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+160,Maitre Nyada,,Mignon,S,Vent,Fruit de mer,Ranger,Commun,Aucun,Aucun,"YKW2, Sceau Lég., Sceau Déballerine"
+161,,,,,,,,,Aucun,Aucun,
+162,,,,,,,,,Aucun,Aucun,
+163,,,,,,,,,Aucun,Aucun,
+164,,,,,,,,,Aucun,Aucun,
+165,,,,,,,,,Aucun,Aucun,
+166,,,,,,,,,Aucun,Aucun,
+167,,,,,,,,,Aucun,Aucun,
+168,,,,,,,,,Aucun,Aucun,
+169,,,,,,,,,Aucun,Aucun,
+170,,,,,,,,,Aucun,Aucun,
+171,,,,,,,,,Aucun,Aucun,
+172,,,,,,,,,Aucun,Aucun,
+173,,,,,,,,,Aucun,Aucun,
+174,,,,,,,,,Aucun,Aucun,
+175,,,,,,,,,Aucun,Aucun,
+176,,,,,,,,,Aucun,Aucun,
+177,,,,,,,,,Aucun,Aucun,
+178,,,,,,,,,Aucun,Aucun,
+179,,,,,,,,,Aucun,Aucun,
+180,,,,,,,,,Aucun,Aucun,
+181,,,,,,,,,Aucun,Aucun,
+182,,,,,,,,,Aucun,Aucun,
+183,,,,,,,,,Aucun,Aucun,
+184,,,,,,,,,Aucun,Aucun,
+185,,,,,,,,,Aucun,Aucun,
+186,,,,,,,,,Aucun,Aucun,
+187,,,,,,,,,Aucun,Aucun,
+188,,,,,,,,,Aucun,Aucun,
+189,,,,,,,,,Aucun,Aucun,
+190,,,,,,,,,Aucun,Aucun,
+191,,,,,,,,,Aucun,Aucun,
+192,,,,,,,,,Aucun,Aucun,
+193,,,,,,,,,Aucun,Aucun,
+194,,,,,,,,,Aucun,Aucun,
+195,,,,,,,,,Aucun,Aucun,
+196,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
+,,,,,,,,,Aucun,Aucun,
