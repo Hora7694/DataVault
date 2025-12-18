@@ -2,15 +2,35 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentions Légales - DataVault</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        .legal-content { max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.7; color: #444; }
-        h2 { color: #333; border-bottom: 2px solid #5553ff; padding-bottom: 5px; margin-top: 30px; }
+        .legal-content { 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 20px; 
+            line-height: 1.7; 
+            color: var(--text-color); 
+        }
+        h2 { 
+            color: var(--text-color); 
+            border-bottom: 2px solid var(--accent-color); 
+            padding-bottom: 5px; 
+            margin-top: 30px; 
+        }
         section { margin-bottom: 20px; }
+        
+        /* On s'assure que les liens dans le texte restent lisibles */
+        .legal-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+    <button id="theme-toggle">🌙 Mode Sombre</button>
+
     <div style="padding: 20px;">
         <button onclick="window.history.back()" class="btn-back">← Retour</button>
     </div>
@@ -47,5 +67,33 @@
             <p>L'auteur ne peut être tenu responsable d'éventuelles erreurs contenues dans les bases de données fournies.</p>
         </section>
     </main>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.85em; color: var(--sub-text); margin-top: 50px;">
+        <p>&copy; 2025 DataVault &bull; Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // --- LOGIQUE DU DARK MODE (IDENTIQUE AUX AUTRES PAGES) ---
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Vérifier la préférence stockée au chargement
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = "☀️ Mode Clair";
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                toggleBtn.textContent = "☀️ Mode Clair";
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                toggleBtn.textContent = "🌙 Mode Sombre";
+            }
+        });
+    </script>
 </body>
 </html>
