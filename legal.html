@@ -5,18 +5,24 @@
     <title>Mentions Légales - DataVault</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        body { padding: 40px; line-height: 1.6; color: #444; max-width: 800px; margin: auto; }
-        h2 { border-bottom: 2px solid #5553ff; }
+        .legal-content { max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.7; color: #444; }
+        h2 { color: #333; border-bottom: 2px solid #5553ff; padding-bottom: 5px; margin-top: 30px; }
     </style>
 </head>
 <body>
-    <button onclick="window.history.back()" class="btn-back">← Retour</button>
-    <h1>Mentions Légales</h1>
-    <h2>Propriété</h2>
-    <p>DataVault est un projet personnel indépendant. Les compilations de données sont la propriété de l'auteur du site.</p>
-    <h2>Droits d'Auteur</h2>
-    <p>Les noms et marques cités (ex: Yo-kai Watch, LEVEL-5) appartiennent à leurs propriétaires respectifs. Ce site propose une visualisation à but informatif.</p>
-    <h2>Soutien</h2>
-    <p>Les dons via Ko-fi soutiennent exclusivement l'hébergement technique du site.</p>
+    <div style="padding: 20px;">
+        <button onclick="window.history.back()" class="btn-back">← Retour</button>
+    </div>
+    <main class="legal-content">
+        <h1>Mentions Légales</h1>
+        <section>
+            <h2>1. Édition du site</h2>
+            <p><strong>DataVault</strong> est un service indépendant de visualisation de données statiques.</p>
+        </section>
+        <section>
+            <h2>2. Propriété</h2>
+            <p>Les données appartiennent à leurs propriétaires respectifs (ex: LEVEL-5 Inc.).</p>
+        </section>
+    </main>
 </body>
 </html>
