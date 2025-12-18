@@ -38,45 +38,52 @@
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.8em; color: #888;">
-        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8;">
+        <p>Plateforme de données <strong>DataVault</strong></p>
+        
+        <div style="margin: 20px 0;">
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script type='text/javascript'>
+                kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
+                kofiwidget2.draw();
+            </script>
+        </div>
+
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales & Confidentialité</a></p>
     </footer>
 
     <script>
-        let availableFiles = [];
+        let availableFiles = []; // Liste vide au départ
 
-        // Charger le registre JSON
+        // RÉCUPÉRATION DES DONNÉES DEPUIS LE JSON
         async function loadRegistry() {
             try {
                 const response = await fetch('registry.json');
                 availableFiles = await response.json();
-            } catch (error) {
-                console.error("Erreur chargement registre:", error);
+            } catch (err) {
+                console.error("Erreur de lecture du fichier registry.json", err);
             }
-        }
-
-        // Redirection vers le viewer avec TOUS les paramètres
-        function goToViewer(file) {
-            const params = new URLSearchParams({
-                file: file.path,
-                alias: file.alias,
-                owner: file.owner,
-                author: file.author,
-                image_author: file.image_author || "" // Ajout du crédit image
-            });
-            window.location.href = `viewer.html?${params.toString()}`;
         }
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
-        // Système de suggestions (Ton code original préservé)
-        searchInput.addEventListener('input', () => {
-            const val = searchInput.value.trim().toLowerCase();
-            suggestionsBox.innerHTML = '';
+        function goToViewer(file) {
+            if (!file) return;
+            const p = new URLSearchParams();
+            p.append('file', file.path);
+            p.append('alias', file.alias);
+            p.append('owner', file.owner);
+            p.append('author', file.author);
+            window.location.href = "viewer.html?" + p.toString();
+        }
 
-            if (val.length < 2) {
+        searchInput.addEventListener('input', () => {
+            const val = searchInput.value.toLowerCase().trim();
+            suggestionsBox.innerHTML = '';
+            
+            if (val.length < 1) {
                 suggestionsBox.style.display = 'none';
                 return;
             }
@@ -118,10 +125,9 @@
             }
         });
 
-        // Lancer le chargement
+        // Lancer le chargement au démarrage
         loadRegistry();
 
-        // Gestion du Dark Mode
         const btn = document.getElementById('theme-toggle');
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
