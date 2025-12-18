@@ -2,62 +2,119 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    <button id="theme-toggle">🌙 Mode Sombre</button>
-    <div style="margin-top: 100px; text-align: center;">
+    <button id="theme-toggle">🌙</button>
+
+    <div class="main-content">
         <h1>DataVault</h1>
+        
         <div class="search-container">
-            <input type="search" id="site-search" placeholder="Rechercher un fichier...">
-            <div id="suggestions" class="suggestions-box" style="display: none;"></div>
+            <form id="search-form" autocomplete="off" style="display: flex; gap: 10px;">
+                <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)..." style="min-width: 300px;">
+            </form>
+            <div id="suggestions" class="suggestions-box"></div>
         </div>
     </div>
 
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.8em; color: #888;">
+        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+    </footer>
+
     <script>
-        const toggleBtn = document.getElementById('theme-toggle');
-        
-        function applyTheme() {
-            if (localStorage.getItem('dark-mode') === 'enabled') {
-                document.body.classList.add('dark-mode');
-                toggleBtn.textContent = "☀️ Mode Clair";
+        // SCRIPT DARK MODE
+        const btn = document.getElementById('theme-toggle');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            btn.textContent = '☀️';
+        }
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            btn.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        // TON CODE DE RECHERCHE ORIGINAL
+        let availableFiles = [];
+        async function loadRegistry() {
+            try {
+                const response = await fetch('registry.json');
+                availableFiles = await response.json();
+            } catch (error) {
+                console.error("Erreur chargement registre:", error);
             }
         }
 
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('dark-mode', isDark ? 'enabled' : 'disabled');
-            toggleBtn.textContent = isDark ? "☀️ Mode Clair" : "🌙 Mode Sombre";
-        });
-
-        applyTheme();
-
-        // Logique de recherche (Registry)
-        let availableFiles = [];
-        fetch('registry.json').then(r => r.json()).then(data => availableFiles = data);
+        function goToViewer(file) {
+            const params = new URLSearchParams({
+                file: file.path,
+                alias: file.alias,
+                owner: file.owner,
+                author: file.author
+            });
+            window.location.href = `viewer.html?${params.toString()}`;
+        }
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
+        const searchForm = document.getElementById('search-form');
 
         searchInput.addEventListener('input', () => {
-            const val = searchInput.value.toLowerCase();
+            const val = searchInput.value.trim().toLowerCase();
             suggestionsBox.innerHTML = '';
-            if (val.length < 2) { suggestionsBox.style.display = 'none'; return; }
-            
+
+            if (val.length < 2) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+
             const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
-            matches.forEach(file => {
-                const div = document.createElement('div');
-                div.className = 'suggestion-item';
-                div.innerHTML = `<strong>${file.alias}</strong>`;
-                div.onclick = () => {
-                    window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}&author=${encodeURIComponent(file.author)}`;
-                };
-                suggestionsBox.appendChild(div);
-            });
-            suggestionsBox.style.display = matches.length ? 'block' : 'none';
+
+            if (matches.length > 0) {
+                matches.forEach(file => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.innerHTML = `<strong>${file.alias}</strong>`;
+                    div.addEventListener('click', () => {
+                        searchInput.value = file.alias;
+                        suggestionsBox.style.display = 'none';
+                        goToViewer(file);
+                    });
+                    suggestionsBox.appendChild(div);
+                });
+                suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
         });
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = searchInput.value.trim().toLowerCase();
+            const found = availableFiles.find(f => f.alias.toLowerCase() === val);
+            if (found) goToViewer(found);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
+        });
+
+        loadRegistry();
     </script>
 </body>
 </html>
