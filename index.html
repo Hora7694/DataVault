@@ -6,98 +6,94 @@
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        html, body { height: 100%; margin: 0; font-family: sans-serif; display: flex; flex-direction: column; }
-        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
-        .search-container { position: relative; width: 100%; max-width: 400px; }
-        #site-search { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .suggestions-box { position: absolute; width: 100%; background: white; border: 1px solid #ddd; border-top: none; display: none; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .suggestion-item { padding: 12px; cursor: pointer; border-bottom: 1px solid #eee; }
-        .suggestion-item:hover { background: #f8f9ff; color: #5553ff; }
-        footer { text-align: center; padding: 30px; border-top: 1px solid #eee; background: #fff; }
+        /* Force le footer en bas sans casser ton design */
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; }
+        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
 
     <div class="main-content">
-        <h1 style="color: #333; margin-bottom: 30px;">DataVault</h1>
+        <h1>DataVault</h1>
+        
         <div class="search-container">
             <form id="search-form" autocomplete="off">
-                <input type="search" id="site-search" placeholder="Rechercher un fichier (ex: Yo-kai)...">
+                <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)...">
+                <button type="submit">Afficher</button>
             </form>
             <div id="suggestions" class="suggestions-box"></div>
         </div>
     </div>
 
-    <footer>
-        <p style="margin-bottom: 15px; color: #666;">Plateforme de données <strong>DataVault</strong></p>
-        <div id="kofi-widget" style="margin-bottom: 15px;">
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.8em; color: #888;">
+        <p>Plateforme de données <strong>DataVault</strong></p>
+        
+        <div style="margin: 20px 0;">
             <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
             <script type='text/javascript'>
                 kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
                 kofiwidget2.draw();
             </script>
         </div>
-        <p style="font-size: 0.8em; color: #999;">&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+
+        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
     </footer>
 
     <script>
-        let availableFiles = [];
-
-        // Chargement du registre avec gestion d'erreur complète
-        fetch('./registry.json')
-            .then(response => {
-                if (!response.ok) throw new Error("Fichier registry.json introuvable sur le serveur");
-                return response.json();
-            })
-            .then(data => {
-                availableFiles = data;
-                console.log("Registre chargé :", availableFiles);
-            })
-            .catch(err => {
-                console.error("Erreur critique :", err);
-                alert("Erreur : Impossible de charger la liste des fichiers. Vérifiez que registry.json est bien à la racine.");
-            });
+        const availableFiles = [
+            { 
+                alias: "Yo-kai Watch 2", 
+                path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
+                owner: "LEVEL-5 Inc.", 
+                author: "Admin" 
+            }
+        ];
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
+        const searchForm = document.getElementById('search-form');
 
-        // Affichage des suggestions
+        function goToViewer(file) {
+            if (!file) return;
+            const p = new URLSearchParams();
+            p.append('file', file.path);
+            p.append('alias', file.alias);
+            p.append('owner', file.owner);
+            p.append('author', file.author);
+            window.location.href = "viewer.html?" + p.toString();
+        }
+
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
-            
-            if (val.length < 1) {
-                suggestionsBox.style.display = 'none';
-                return;
-            }
+            if (val.length < 1) { suggestionsBox.style.display = 'none'; return; }
 
             const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
 
-            if (matches.length > 0) {
-                matches.forEach(file => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    div.innerHTML = `<strong>${file.alias}</strong>`;
-                    div.onclick = () => {
-                        const p = new URLSearchParams();
-                        p.append('file', file.path);
-                        p.append('alias', file.alias);
-                        p.append('owner', file.owner);
-                        p.append('author', file.author);
-                        window.location.href = "viewer.html?" + p.toString();
-                    };
-                    suggestionsBox.appendChild(div);
+            matches.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.style.cursor = 'pointer';
+                div.innerHTML = `<strong>${file.alias}</strong>`;
+                div.addEventListener('click', () => {
+                    searchInput.value = file.alias;
+                    suggestionsBox.style.display = 'none';
+                    goToViewer(file);
                 });
-                suggestionsBox.style.display = 'block';
-            } else {
-                suggestionsBox.style.display = 'none';
-            }
+                suggestionsBox.appendChild(div);
+            });
+            suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
 
-        // Empêcher le rechargement de la page sur "Entrée"
-        document.getElementById('search-form').onsubmit = (e) => e.preventDefault();
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = searchInput.value.trim().toLowerCase();
+            const found = availableFiles.find(f => f.alias.toLowerCase() === val);
+            if (found) goToViewer(found);
+            else alert("Fichier non trouvé.");
+        });
 
-        // Fermer les suggestions si on clique ailleurs
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
         });
