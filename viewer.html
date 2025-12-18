@@ -2,33 +2,30 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav style="padding: 20px; border-bottom: 1px solid #eee;">
-        <button onclick="window.history.back()" class="btn-back">← Retour à la recherche</button>
+    <div style="padding: 20px;">
+        <button onclick="window.history.back()" class="btn-back">← Retour</button>
         
-        <div style="display: flex; align-items: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
-            <h1 id="display-alias" style="margin: 0; white-space: nowrap; font-size: 1.8em;">Chargement...</h1>
-            <a id="download-btn" href="#" download style="text-decoration: none;">
-                <button style="background-color: #5553ff; padding: 8px 18px; font-size: 0.85em; border-radius: 20px; color: white; border: none; cursor: pointer; font-weight: bold;">
-                    Télécharger .CSV
+        <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
+            <h1 id="display-alias" style="margin: 0; white-space: nowrap;">Chargement...</h1>
+            <a id="download-btn" href="#" download>
+                <button style="background-color: #5553ff; padding: 8px 15px; color: white; border: none; border-radius: 20px; cursor: pointer;">
+                    Télécharger CSV
                 </button>
             </a>
         </div>
-        <p id="display-path" class="path-sub" style="margin-top: 8px; color: #888; font-family: monospace;"></p>
-        <p id="last-modified" style="font-size: 0.8em; color: #aaa; margin-top: 5px;"></p>
-    </nav>
+        <p id="display-path" style="color: #888; font-size: 0.9em; margin-top: 5px;"></p>
+    </div>
 
-    <main id="table-container" style="overflow-x: auto; padding: 20px;"></main>
+    <div id="table-container" style="padding: 20px;"></div>
 
-    <footer style="text-align: center; padding: 60px 20px; margin-top: 50px; border-top: 1px solid #eee; color: #888; font-size: 0.85em; line-height: 1.8;">
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.6;">
+        <p>Base de données créée par <strong id="display-author">...</strong></p>
         
-        <p>Base de données créée et compilée par <strong id="display-author">...</strong></p>
-        
-        <div style="margin: 25px 0;">
+        <div style="margin: 15px 0;">
             <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
             <script type='text/javascript'>
                 kofiwidget2.init('Soutenir DataVault', '#5553ff', 'T6T117BAZT');
@@ -36,79 +33,69 @@
             </script>
         </div>
 
-        <p style="font-size: 0.9em; color: #bbb; max-width: 600px; margin: 20px auto;">
-            Les données relatives à <span id="display-owner">...</span> sont la propriété de leurs auteurs respectifs. 
-            DataVault est un projet indépendant sans affiliation officielle.
-        </p>
-        
-        <p style="margin-top: 30px;">
-            &copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Confidentialité</a>
+        <p style="color: #bbb; font-size: 0.9em;">
+            Données de <span id="display-owner">...</span> &copy; Tous droits réservés.
         </p>
     </footer>
 
     <script>
         async function loadCSV() {
-            const params = new URLSearchParams(window.location.search);
-            const filePath = params.get('file');
+            const urlParams = new URLSearchParams(window.location.search);
             
-            if (!filePath) return;
+            // Récupération sécurisée avec valeurs par défaut
+            const filePath = urlParams.get('file');
+            const alias = urlParams.get('alias') || "Fichier";
+            const owner = urlParams.get('owner') || "l'auteur";
+            const author = urlParams.get('author') || "Admin";
 
-            // Mise à jour de l'interface
-            document.getElementById('display-alias').textContent = params.get('alias') || "Fichier";
+            if (!filePath) {
+                document.getElementById('display-alias').textContent = "Erreur : Aucun fichier";
+                return;
+            }
+
+            document.getElementById('display-alias').textContent = alias;
             document.getElementById('display-path').textContent = filePath;
-            document.getElementById('display-author').textContent = params.get('author') || "Admin";
-            document.getElementById('display-owner').textContent = params.get('owner') || "ses ayants droit";
+            document.getElementById('display-owner').textContent = owner;
+            document.getElementById('display-author').textContent = author;
             document.getElementById('download-btn').href = filePath;
 
             try {
                 const response = await fetch(filePath);
-                if (!response.ok) throw new Error();
-
-                // Date de dernière modification
-                const lastMod = response.headers.get('Last-Modified');
-                if (lastMod) {
-                    const date = new Date(lastMod);
-                    document.getElementById('last-modified').textContent = "Mis à jour le : " + date.toLocaleDateString('fr-FR');
-                }
+                if (!response.ok) throw new Error("Fichier introuvable");
 
                 const text = await response.text();
                 const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
                 
                 let html = '<table><thead><tr>';
                 const headers = parseCSVLine(rows[0]);
-                headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
+                headers.forEach(h => html += `<th>${h.trim()}</th>`);
                 html += '</tr></thead><tbody>';
 
                 rows.slice(1).forEach(row => {
                     const cells = parseCSVLine(row);
                     html += '<tr>';
-                    cells.forEach(cell => {
-                        let clean = cell.trim().replace(/^"|"$/g, '').replace(/\s{2,}/g, ', ');
-                        html += `<td>${clean}</td>`;
-                    });
+                    cells.forEach(c => html += `<td>${c.trim()}</td>`);
                     html += '</tr>';
                 });
-
                 html += '</tbody></table>';
                 document.getElementById('table-container').innerHTML = html;
-            } catch (e) {
-                document.getElementById('table-container').innerHTML = `<p style="text-align:center; padding:50px; color:red;">Erreur : Impossible de charger le fichier CSV.</p>`;
+
+            } catch (err) {
+                document.getElementById('table-container').innerHTML = "<p style='color:red;'>Erreur lors de l'accès au fichier CSV.</p>";
             }
         }
 
-        // Parseur CSV gérant les guillemets et virgules
         function parseCSVLine(line) {
             const result = [];
-            let current = '', inQuotes = false;
+            let curr = '', inQ = false;
             for (let char of line) {
-                if (char === '"') inQuotes = !inQuotes;
-                else if (char === ',' && !inQuotes) { result.push(current); current = ''; }
-                else current += char;
+                if (char === '"') inQ = !inQ;
+                else if (char === ',' && !inQ) { result.push(curr); curr = ''; }
+                else curr += char;
             }
-            result.push(current);
+            result.push(curr);
             return result;
         }
-
         loadCSV();
     </script>
 </body>
