@@ -6,13 +6,20 @@
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        html, body { height: 100%; margin: 0; }
-        body { display: flex; flex-direction: column; }
-        .main-content {
-            flex: 1;
+        /* Styles spécifiques pour forcer le footer en bas */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+        }
+        .main-content {
+            flex: 1; /* Prend tout l'espace disponible, poussant le footer vers le bas */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centre la barre de recherche verticalement */
             align-items: center;
         }
     </style>
@@ -31,64 +38,65 @@
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.8em; color: #888;">
-        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8;">
+        <p>Plateforme de données <strong>DataVault</strong></p>
+        
+        <div style="margin: 20px 0;">
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script type='text/javascript'>
+                kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
+                kofiwidget2.draw();
+            </script>
+        </div>
+
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales & Confidentialité</a></p>
     </footer>
 
     <script>
-        // SCRIPT DARK MODE
-        const btn = document.getElementById('theme-toggle');
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            btn.textContent = '☀️';
-        }
-        btn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            btn.textContent = isDark ? '☀️' : '🌙';
-        });
+        let availableFiles = []; // Liste vide au départ
 
-        // TON CODE DE RECHERCHE ORIGINAL
-        let availableFiles = [];
+        // RÉCUPÉRATION DES DONNÉES DEPUIS LE JSON
         async function loadRegistry() {
             try {
                 const response = await fetch('registry.json');
                 availableFiles = await response.json();
-            } catch (error) {
-                console.error("Erreur chargement registre:", error);
+            } catch (err) {
+                console.error("Erreur de lecture du fichier registry.json", err);
             }
-        }
-
-        function goToViewer(file) {
-            const params = new URLSearchParams({
-                file: file.path,
-                alias: file.alias,
-                owner: file.owner,
-                author: file.author
-            });
-            window.location.href = `viewer.html?${params.toString()}`;
         }
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
-        searchInput.addEventListener('input', () => {
-            const val = searchInput.value.trim().toLowerCase();
-            suggestionsBox.innerHTML = '';
+        function goToViewer(file) {
+            if (!file) return;
+            const p = new URLSearchParams();
+            p.append('file', file.path);
+            p.append('alias', file.alias);
+            p.append('owner', file.owner);
+            p.append('author', file.author);
+            window.location.href = "viewer.html?" + p.toString();
+        }
 
-            if (val.length < 2) {
+        searchInput.addEventListener('input', () => {
+            const val = searchInput.value.toLowerCase().trim();
+            suggestionsBox.innerHTML = '';
+            
+            if (val.length < 1) {
                 suggestionsBox.style.display = 'none';
                 return;
             }
 
-            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
+            const matches = availableFiles.filter(f => 
+                f.alias.toLowerCase().includes(val)
+            );
 
             if (matches.length > 0) {
                 matches.forEach(file => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
+                    div.style.cursor = 'pointer';
                     div.innerHTML = `<strong>${file.alias}</strong>`;
                     div.addEventListener('click', () => {
                         searchInput.value = file.alias;
@@ -108,13 +116,29 @@
             const val = searchInput.value.trim().toLowerCase();
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
             if (found) goToViewer(found);
+            else alert("Fichier non trouvé.");
         });
 
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
+            if (!e.target.closest('.search-container')) {
+                suggestionsBox.style.display = 'none';
+            }
         });
 
+        // Lancer le chargement au démarrage
         loadRegistry();
+
+        const btn = document.getElementById('theme-toggle');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            btn.textContent = '☀️';
+        }
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            btn.textContent = isDark ? '☀️' : '🌙';
+        });
     </script>
 </body>
 </html>
