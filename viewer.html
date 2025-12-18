@@ -7,8 +7,11 @@
 </head>
 <body>
     <div style="padding: 20px;">
-        <button onclick="window.history.back()" style="margin-bottom: 20px; padding: 10px 25px; border-radius: 25px; cursor: pointer; border: 1px solid #ddd; background: white; font-weight: bold;">← Retour</button>
-        <h2 id="file-title">Chargement des données...</h2>
+        <button onclick="window.history.back()" class="btn-back">← Retour</button>
+        <div class="file-header">
+            <h1 id="display-alias">Chargement...</h1>
+            <p id="display-path" class="path-sub"></p>
+        </div>
     </div>
 
     <div id="table-container"></div>
@@ -17,8 +20,12 @@
         async function loadCSV() {
             const params = new URLSearchParams(window.location.search);
             const filePath = params.get('file');
+            const fileAlias = params.get('alias');
             
             if (!filePath) return;
+
+            document.getElementById('display-alias').textContent = fileAlias || "Fichier sans nom";
+            document.getElementById('display-path').textContent = filePath;
 
             try {
                 const response = await fetch(filePath);
@@ -34,10 +41,9 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(cell => {
-                        // Nettoyage des guillemets et remplacement des espaces multiples par des virgules
                         let cleanCell = cell.trim().replace(/^"|"$/g, '');
+                        // Transforme les tags (espaces multiples) en virgules
                         cleanCell = cleanCell.replace(/\s{2,}/g, ', ');
-                        
                         html += `<td>${cleanCell}</td>`;
                     });
                     html += '</tr>';
@@ -45,10 +51,9 @@
 
                 html += '</tbody></table>';
                 document.getElementById('table-container').innerHTML = html;
-                document.getElementById('file-title').textContent = "Fichier : " + filePath;
 
             } catch (error) {
-                document.getElementById('file-title').innerHTML = "<span style='color:red;'>Erreur de chargement. Vérifie que tu es sur GitHub Pages.</span>";
+                document.getElementById('display-alias').innerHTML = "<span style='color:red;'>Erreur de chargement</span>";
             }
         }
 
