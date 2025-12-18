@@ -6,21 +6,16 @@
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Styles spécifiques pour forcer le footer en bas */
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        .main-content {
-            flex: 1; /* Prend tout l'espace disponible, poussant le footer vers le bas */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Centre la barre de recherche verticalement */
-            align-items: center;
+        /* Structure pour forcer le footer en bas */
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; }
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
         }
     </style>
 </head>
@@ -30,9 +25,9 @@
         <h1>DataVault</h1>
         
         <div class="search-container">
-            <form id="search-form" autocomplete="off" style="display: flex; gap: 10px;">
-                <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)..." style="min-width: 300px;">
-                <!--<button type="submit">Afficher</button>-->
+            <form id="search-form" autocomplete="off">
+                <input type="search" id="site-search" placeholder="Rechercher un fichier...">
+                <button type="submit">Afficher</button>
             </form>
             <div id="suggestions" class="suggestions-box"></div>
         </div>
@@ -54,25 +49,19 @@
 
     <script>
         let availableFiles = [];
-    
-        // --- CHARGEMENT DU REGISTRE ---
+
+        // Chargement du registre JSON
         async function initData() {
             try {
-                // On appelle le nouveau nom ici
-                const response = await fetch('registry.json'); 
-                if (!response.ok) throw new Error("Fichier registry.json introuvable");
-                
+                const response = await fetch('registry.json');
+                if (!response.ok) throw new Error("Erreur registre");
                 availableFiles = await response.json();
-                console.log("Registre chargé avec succès");
             } catch (err) {
-                console.error("Erreur de registre :", err);
-                alert("Erreur technique : Impossible de charger la liste des fichiers.");
+                console.error("Échec du chargement du registre:", err);
             }
         }
-    
-        // Le reste de tes fonctions (goToViewer, etc.) reste identique
+
         function goToViewer(file) {
-            if (!file) return;
             const p = new URLSearchParams();
             p.append('file', file.path);
             p.append('alias', file.alias);
@@ -80,14 +69,36 @@
             p.append('author', file.author);
             window.location.href = "viewer.html?" + p.toString();
         }
-    
-        // ... (garde tout ton code de suggestions et de recherche ici)
-    
-        // Lancer le chargement au démarrage
+
+        const searchInput = document.getElementById('site-search');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        searchInput.addEventListener('input', () => {
+            const val = searchInput.value.toLowerCase().trim();
+            suggestionsBox.innerHTML = '';
+            if (val.length < 1) { suggestionsBox.style.display = 'none'; return; }
+
+            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
+
+            matches.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `<strong>${file.alias}</strong>`;
+                div.onclick = () => goToViewer(file);
+                suggestionsBox.appendChild(div);
+            });
+            suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
+        });
+
+        document.getElementById('search-form').onsubmit = (e) => {
+            e.preventDefault();
+            const val = searchInput.value.trim().toLowerCase();
+            const found = availableFiles.find(f => f.alias.toLowerCase() === val);
+            if (found) goToViewer(found);
+            else alert("Fichier non trouvé.");
+        };
+
         initData();
     </script>
 </body>
 </html>
-
-
-
