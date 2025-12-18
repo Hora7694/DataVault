@@ -231,3 +231,29 @@ tr:hover {
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+
+.cell-image {
+    /* Taille par défaut : l'image prend sa taille réelle */
+    width: auto;
+    height: auto;
+            
+    /* Limites : l'image ne dépassera jamais ces dimensions */
+    max-width: 120px; 
+    max-height: 80px;
+            
+    /* Pour les toutes petites icônes (comme les objets), 
+        on peut les agrandir un peu sans que ce soit trop moche */
+    min-width: 40px; 
+
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    image-rendering: pixelated; /* OPTIONNEL : garde les bords nets pour les petits pixels */
+    transition: transform 0.2s;
+}
+
+.cell-image:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    position: relative;
+}
