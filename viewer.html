@@ -45,6 +45,8 @@
 
             try {
                 const response = await fetch(filePath);
+                if (!response.ok) throw new Error();
+
                 const lastMod = response.headers.get('Last-Modified');
                 if (lastMod) {
                     const date = new Date(lastMod);
@@ -53,7 +55,8 @@
 
                 const text = await response.text();
                 const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
-                
+                if (rows.length === 0) return;
+
                 let html = '<table><thead><tr>';
                 const headers = parseCSVLine(rows[0]);
                 headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
@@ -72,7 +75,7 @@
                 html += '</tbody></table>';
                 document.getElementById('table-container').innerHTML = html;
             } catch (e) {
-                document.getElementById('display-alias').textContent = "Erreur de chargement";
+                document.getElementById('display-alias').textContent = "Fichier introuvable";
             }
         }
 
