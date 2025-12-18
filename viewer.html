@@ -101,17 +101,22 @@
                     const cells = parseCSVLine(row);
                     html += '<tr>';
                     cells.forEach(c => {
-                        // Nettoyage strict des guillemets et espaces
+                        // 1. Nettoyage strict des guillemets et espaces
                         let val = c.trim().replace(/^"|"$/g, '').trim();
                         
-                        // Détection d'URL d'image
-                        const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || 
-                                         val.includes("static.wikia.nocookie.net") || 
-                                         val.includes("images.wikia.com");
-
-                        if (val.startsWith('http') && isImgUrl) {
-                            // On force l'URL propre dans le src
-                            html += `<td><img src="${val}" class="cell-image" onerror="this.style.display='none'"></td>`;
+                        // 2. Détection d'URL
+                        if (val.startsWith('http')) {
+                            // On vérifie si c'est une image (soit par extension, soit par domaine Wikia)
+                            const isWikia = val.includes("static.wikia.nocookie.net");
+                            const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || isWikia;
+                
+                            if (isImgUrl) {
+                                // On garde l'URL telle quelle (avec ses paramètres) pour Wikia
+                                // On ajoute referrerpolicy="no-referrer" pour éviter les blocages de sécurité
+                                html += `<td><img src="${val}" class="cell-image" referrerpolicy="no-referrer" onerror="this.style.display='none'"></td>`;
+                            } else {
+                                html += `<td><a href="${val}" target="_blank">Lien</a></td>`;
+                            }
                         } else if (/\s{2,}/.test(val)) {
                             val = val.replace(/\s{2,}/g, ', ');
                             html += `<td><span class="tag-pill">${val}</span></td>`;
@@ -159,6 +164,7 @@
     </script>
 </body>
 </html>
+
 
 
 
