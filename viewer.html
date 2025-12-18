@@ -2,53 +2,24 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualiseur - DataVault</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        .tag-pill {
-            display: inline-block;
-            background: var(--tag-bg);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.9em;
-            color: var(--tag-text);
-            border: 1px solid var(--border-color);
-        }
-    </style>
 </head>
 <body>
     <button id="theme-toggle">🌙 Mode Sombre</button>
-
     <div style="padding: 20px;">
-        <button onclick="window.history.back()" class="btn-back">← Retour</button>
-        <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
-            <h1 id="display-alias" style="margin: 0;">Chargement...</h1>
-            <a id="download-btn" href="#" download>
-                <button style="background-color: #5553ff; padding: 8px 15px; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;">Télécharger CSV</button>
-            </a>
-        </div>
-        <p id="display-path" style="color: var(--sub-text); font-size: 0.85em; margin-top: 5px; font-family: monospace;"></p>
-        <p id="last-modified" style="font-size: 0.8em; color: var(--sub-text); margin-top: 5px;"></p>
+        <button onclick="window.history.back()" style="padding: 10px; cursor: pointer;">← Retour</button>
+        <h1 id="display-alias" style="text-align: left; margin-top: 20px;">Chargement...</h1>
+        <div id="table-container" style="overflow-x: auto; margin-top: 20px;"></div>
     </div>
-
-    <div id="table-container" style="padding: 20px; overflow-x: auto;">
-        <p id="loading-status">Initialisation...</p>
-    </div>
-
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.85em; color: var(--sub-text); line-height: 1.8;">
-        <p>Base de données créée par <strong id="display-author">...</strong></p>
-        <p>Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
-    </footer>
 
     <script>
-        // --- LOGIQUE DU DARK MODE ---
         const toggleBtn = document.getElementById('theme-toggle');
         if (localStorage.getItem('dark-mode') === 'enabled') {
             document.body.classList.add('dark-mode');
             toggleBtn.textContent = "☀️ Mode Clair";
         }
+
         toggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -56,36 +27,30 @@
             toggleBtn.textContent = isDark ? "☀️ Mode Clair" : "🌙 Mode Sombre";
         });
 
-        // --- CHARGEMENT DU CSV ---
         async function loadCSV() {
             const container = document.getElementById('table-container');
+            const urlParams = new URLSearchParams(window.location.search);
+            const filePath = urlParams.get('file');
+            
+            if (!filePath) { container.innerHTML = "Erreur: Fichier non spécifié."; return; }
+            document.getElementById('display-alias').textContent = urlParams.get('alias');
+
             try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const filePath = urlParams.get('file');
-                if (!filePath) return;
-
-                document.getElementById('display-alias').textContent = urlParams.get('alias') || "Fichier";
-                document.getElementById('display-path').textContent = filePath;
-                document.getElementById('display-owner').textContent = urlParams.get('owner') || "l'auteur";
-                document.getElementById('display-author').textContent = urlParams.get('author') || "Admin";
-                document.getElementById('download-btn').href = filePath;
-
                 const response = await fetch(filePath);
-                if (!response.ok) throw new Error("Fichier introuvable.");
-
+                if (!response.ok) throw new Error("Fichier introuvable sur le serveur.");
                 const text = await response.text();
-                const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
-                
+                const rows = text.split('\n').filter(r => r.trim());
+
                 let html = '<table><thead><tr>';
-                const headers = parseCSVLine(rows[0]);
-                headers.forEach(h => html += `<th>${h.trim().replace(/^"|"$/g, '')}</th>`);
+                const headers = rows[0].split(',');
+                headers.forEach(h => html += `<th>${h.replace(/"/g, '')}</th>`);
                 html += '</tr></thead><tbody>';
 
                 rows.slice(1).forEach(row => {
-                    const cells = parseCSVLine(row);
                     html += '<tr>';
+                    const cells = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); // Regex pour ignorer les virgules dans les guillemets
                     cells.forEach(c => {
-                        let val = c.trim().replace(/^"|"$/g, '');
+                        let val = c.trim().replace(/"/g, '');
                         if (/\s{2,}/.test(val)) {
                             val = val.replace(/\s{2,}/g, ', ');
                             html += `<td><span class="tag-pill">${val}</span></td>`;
@@ -96,17 +61,7 @@
                     html += '</tr>';
                 });
                 container.innerHTML = html + '</tbody></table>';
-            } catch (err) { container.innerHTML = `<p style="color:red;">${err.message}</p>`; }
-        }
-
-        function parseCSVLine(line) {
-            const result = []; let curr = '', inQ = false;
-            for (let char of line) {
-                if (char === '"') inQ = !inQ;
-                else if (char === ',' && !inQ) { result.push(curr); curr = ''; }
-                else curr += char;
-            }
-            result.push(curr); return result;
+            } catch (e) { container.innerHTML = "Erreur de chargement : " + e.message; }
         }
         loadCSV();
     </script>
