@@ -18,7 +18,6 @@
     </div>
 
     <script>
-        // AJOUTE TES FICHIERS ICI
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2 - Liste des Yo-kai", 
@@ -51,14 +50,14 @@
                     `;
 
                     div.onclick = () => {
-                        searchInput.value = file.path;
+                        // On stocke l'objet sélectionné pour envoyer les deux infos
+                        searchInput.value = file.alias;
+                        searchInput.dataset.path = file.path;
                         suggestionsBox.style.display = 'none';
                     };
                     suggestionsBox.appendChild(div);
                 });
                 suggestionsBox.style.display = 'block';
-            } else {
-                suggestionsBox.style.display = 'none';
             }
         }
 
@@ -73,9 +72,12 @@
 
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
-            const filePath = searchInput.value;
-            if(filePath) {
-                window.location.href = `viewer.html?file=${encodeURIComponent(filePath)}`;
+            const alias = searchInput.value;
+            // On retrouve le chemin correspondant à l'alias
+            const file = availableFiles.find(f => f.alias === alias) || { alias: alias, path: searchInput.dataset.path };
+            
+            if(file.path) {
+                window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}`;
             }
         };
     </script>
