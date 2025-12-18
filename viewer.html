@@ -7,20 +7,20 @@
 </head>
 <body>
     <div style="padding: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>
-                <button onclick="window.history.back()" class="btn-back">← Retour</button>
-                <div class="file-header">
-                    <h1 id="display-alias">Chargement...</h1>
-                    <p id="display-path" class="path-sub"></p>
-                    <p id="last-modified" style="font-size: 0.8em; color: #666; margin-top: -10px;"></p>
-                </div>
-            </div>
+        <button onclick="window.history.back()" class="btn-back">← Retour</button>
+        
+        <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
+            <h1 id="display-alias" style="margin: 0; white-space: nowrap; font-size: 1.8em;">Chargement...</h1>
             
-            <a id="download-btn" href="#" download style="margin-top: 20px; text-decoration: none;">
-                <button style="background-color: #28a745;">💾 Télécharger CSV</button>
+            <a id="download-btn" href="#" download style="text-decoration: none;">
+                <button style="background-color: #5553ff; padding: 8px 15px; font-size: 0.85em; border-radius: 20px;">
+                    Télécharger CSV
+                </button>
             </a>
         </div>
+
+        <p id="display-path" class="path-sub" style="margin-top: 5px;"></p>
+        <p id="last-modified" style="font-size: 0.8em; color: #888; margin-top: -10px;"></p>
     </div>
 
     <div id="table-container"></div>
@@ -37,14 +37,13 @@
             
             if (!filePath) return;
 
-            document.getElementById('display-alias').textContent = fileAlias || "Fichier sans nom";
+            document.getElementById('display-alias').textContent = fileAlias || "Fichier";
             document.getElementById('display-path').textContent = filePath;
             document.getElementById('download-btn').href = filePath;
 
             try {
                 const response = await fetch(filePath);
                 
-                // RÉCUPÉRATION DE LA DATE DE DERNIÈRE MODIFICATION
                 const lastMod = response.headers.get('Last-Modified');
                 if (lastMod) {
                     const date = new Date(lastMod);
@@ -74,7 +73,7 @@
                 document.getElementById('table-container').innerHTML = html;
 
             } catch (error) {
-                document.getElementById('display-alias').innerHTML = "<span style='color:red;'>Erreur de chargement</span>";
+                document.getElementById('display-alias').innerHTML = "Erreur de chargement";
             }
         }
 
