@@ -1,0 +1,9 @@
+id,nom,email,date_inscription,pays,statut
+1,Jean Dupont,jean.dupont@example.com,2025-01-15,France,actif
+2,Marie Lefebvre,m.lefebvre@test.fr,2025-02-10,France,inactif
+3,Lucas Müller,l.muller@domain.de,2025-03-05,Allemagne,actif
+4,Elena Rodriguez,elena.rod@provider.es,2025-03-12,Espagne,actif
+5,Thomas Smith,t.smith@mail.com,2025-04-01,Royaume-Uni,suspendu
+6,Chloé Bernard,c.bernard@web.fr,2025-05-20,France,actif
+7,Alessandro Rossi,a.rossi@italy.it,2025-06-14,Italie,actif
+8,Emma Wilson,emma.w@service.com,2025-07-02,États-Unis,inactif
