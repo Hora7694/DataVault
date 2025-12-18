@@ -233,27 +233,25 @@ tr:hover {
 }
 
 .cell-image {
-    /* Taille par défaut : l'image prend sa taille réelle */
-    width: auto;
+    /* On utilise une variable CSS pour la taille minimale */
+    width: var(--min-size, 50px); 
     height: auto;
-            
-    /* Limites : l'image ne dépassera jamais ces dimensions */
-    max-width: 120px; 
-    max-height: 80px;
-            
-    /* Pour les toutes petites icônes (comme les objets), 
-        on peut les agrandir un peu sans que ce soit trop moche */
-    min-width: 40px; 
-
+    max-width: 150px; /* Limite haute pour ne pas casser le tableau */
     object-fit: contain;
     display: block;
     margin: auto;
-    image-rendering: pixelated; /* OPTIONNEL : garde les bords nets pour les petits pixels */
-    transition: transform 0.2s;
+    image-rendering: pixelated; 
+    transition: transform 0.3s ease; /* Transition plus douce */
 }
 
 .cell-image:hover {
+    /* Zoom de 50% (1.5) peu importe la taille de base */
     transform: scale(1.5);
-    z-index: 10;
+    z-index: 99;
     position: relative;
+    cursor: zoom-in;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ombre pour faire ressortir l'image zoomée */
+    background: rgba(255,255,255,0.1); /* Petit fond pour voir la transparence */
+    border-radius: 4px;
 }
+
