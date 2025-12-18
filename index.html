@@ -5,25 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Styles spécifiques pour forcer le footer en bas */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1; /* Prend tout l'espace disponible, poussant le footer vers le bas */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centre la barre de recherche verticalement */
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>DataVault</h1>
-    
-    <div class="search-container">
-        <form id="search-form" autocomplete="off">
-            <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)...">
-            <button type="submit">Afficher</button>
-        </form>
-        <div id="suggestions" class="suggestions-box"></div>
+    <div class="main-content">
+        <h1>DataVault</h1>
+        
+        <div class="search-container">
+            <form id="search-form" autocomplete="off" style="display: flex; gap: 10px;">
+                <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)..." style="min-width: 300px;">
+                <button type="submit">Afficher</button>
+            </form>
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 100px; font-size: 0.8em; color: #888;">
-        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; font-size: 0.85em; color: #888; line-height: 1.8;">
+        <p>Plateforme de données <strong>DataVault</strong></p>
+        
+        <div style="margin: 20px 0;">
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script type='text/javascript'>
+                kofiwidget2.init('Soutenir le projet', '#5553ff', 'T6T117BAZT');
+                kofiwidget2.draw();
+            </script>
+        </div>
+
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales & Confidentialité</a></p>
     </footer>
 
     <script>
-        // LISTE DES FICHIERS (Vérifie bien les chemins !)
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2", 
@@ -37,7 +66,6 @@
         const suggestionsBox = document.getElementById('suggestions');
         const searchForm = document.getElementById('search-form');
 
-        // FONCTION DE REDIRECTION (Sécurisée)
         function goToViewer(file) {
             if (!file) return;
             const p = new URLSearchParams();
@@ -48,7 +76,6 @@
             window.location.href = "viewer.html?" + p.toString();
         }
 
-        // AFFICHAGE DES SUGGESTIONS
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
@@ -68,7 +95,6 @@
                     div.className = 'suggestion-item';
                     div.style.cursor = 'pointer';
                     div.innerHTML = `<strong>${file.alias}</strong>`;
-                    // Clic sur une suggestion
                     div.addEventListener('click', () => {
                         searchInput.value = file.alias;
                         suggestionsBox.style.display = 'none';
@@ -82,20 +108,14 @@
             }
         });
 
-        // VALIDATION DU FORMULAIRE (Bouton ou Entrée)
         searchForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const val = searchInput.value.trim().toLowerCase();
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
-            
-            if (found) {
-                goToViewer(found);
-            } else {
-                alert("Fichier non trouvé. Veuillez taper le nom exact ou cliquer sur une suggestion.");
-            }
+            if (found) goToViewer(found);
+            else alert("Fichier non trouvé.");
         });
 
-        // FERMER LES SUGGESTIONS SI ON CLIQUE AILLEURS
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 suggestionsBox.style.display = 'none';
