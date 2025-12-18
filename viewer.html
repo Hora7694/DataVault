@@ -19,6 +19,8 @@
     </style>
 </head>
 <body>
+    <button id="theme-toggle">🌙</button>
+    
     <div style="padding: 20px;">
         <button onclick="window.history.back()" class="btn-back">← Retour</button>
         
@@ -149,6 +151,19 @@
         }
 
         loadCSV();
+
+        const btn = document.getElementById('theme-toggle');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            btn.textContent = '☀️';
+        }
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            btn.textContent = isDark ? '☀️' : '🌙';
+        });
     </script>
 </body>
 </html>
+
