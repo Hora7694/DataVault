@@ -56,7 +56,7 @@
             </script>
         </div>
         
-        <p id="display-image-author-container" style="display:none;">Images fournies par : <strong id="display-image-author"></strong></p>
+        <p id="display-image-author-container" style="display:none;">Images provenant de: <strong id="display-image-author"></strong></p>
         <p>Données de <span id="display-owner">...</span> &copy; Tous droits réservés.</p>
     </footer>
 
@@ -100,28 +100,24 @@
                 rows.slice(1).forEach(row => {
                     const cells = parseCSVLine(row);
                     html += '<tr>';
-                    cells.forEach(c => {
-                        // 1. Nettoyage strict des guillemets et espaces
-                        let val = c.trim().replace(/^"|"$/g, '').trim();
+                    cells.forEach(val => {
+                        // 1. On nettoie tout : espaces insécables, retours à la ligne cachés, guillemets
+                        let cleanVal = val.trim().replace(/^"|"$/g, '').replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
                         
-                        // 2. Détection d'URL
-                        if (val.startsWith('http')) {
-                            // On vérifie si c'est une image (soit par extension, soit par domaine Wikia)
-                            const isWikia = val.includes("static.wikia.nocookie.net");
-                            const isImgUrl = val.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) != null || isWikia;
-                
-                            if (isImgUrl) {
-                                // On garde l'URL telle quelle (avec ses paramètres) pour Wikia
-                                // On ajoute referrerpolicy="no-referrer" pour éviter les blocages de sécurité
-                                html += `<td><img src="${val}" class="cell-image" referrerpolicy="no-referrer" onerror="this.style.display='none'"></td>`;
-                            } else {
-                                html += `<td><a href="${val}" target="_blank">Lien</a></td>`;
-                            }
-                        } else if (/\s{2,}/.test(val)) {
-                            val = val.replace(/\s{2,}/g, ', ');
-                            html += `<td><span class="tag-pill">${val}</span></td>`;
+                        // 2. Détection d'URL d'image
+                        const isImgUrl = cleanVal.startsWith('http') && (
+                            cleanVal.match(/\.(jpeg|jpg|gif|png|webp|svg)/i) || 
+                            cleanVal.includes("static.wikia.nocookie.net")
+                        );
+    
+                        if (isImgUrl) {
+                            // 3. On utilise l'URL propre avec referrerpolicy pour bypasser les protections Wikia
+                            html += `<td><img src="${cleanVal}" class="cell-image" referrerpolicy="no-referrer" loading="lazy"></td>`;
+                        } else if (/\s{2,}/.test(cleanVal)) {
+                            const tags = cleanVal.replace(/\s{2,}/g, ', ');
+                            html += `<td><span class="tag-pill">${tags}</span></td>`;
                         } else {
-                            html += `<td>${val}</td>`;
+                            html += `<td>${cleanVal}</td>`;
                         }
                     });
                     html += '</tr>';
@@ -164,6 +160,7 @@
     </script>
 </body>
 </html>
+
 
 
 
