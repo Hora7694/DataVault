@@ -76,6 +76,7 @@
             p.append('alias', file.alias);
             p.append('owner', file.owner);
             p.append('author', file.author);
+            p.append('image_author', file.image_author || "");
             window.location.href = "viewer.html?" + p.toString();
         }
 
@@ -142,3 +143,4 @@
     </script>
 </body>
 </html>
+
