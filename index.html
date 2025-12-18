@@ -70,13 +70,14 @@
         const searchForm = document.getElementById('search-form');
 
         function goToViewer(file) {
-            if (!file) return;
-            const p = new URLSearchParams();
-            p.append('file', file.path);
-            p.append('alias', file.alias);
-            p.append('owner', file.owner);
-            p.append('author', file.author);
-            window.location.href = "viewer.html?" + p.toString();
+            const params = new URLSearchParams({
+                file: file.path,
+                alias: file.alias,
+                owner: file.owner,
+                author: file.author,
+                image_author: file.image_author || "" // On ajoute cette ligne
+            });
+            window.location.href = `viewer.html?${params.toString()}`;
         }
 
         searchInput.addEventListener('input', () => {
@@ -142,3 +143,4 @@
     </script>
 </body>
 </html>
+
