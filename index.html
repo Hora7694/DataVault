@@ -2,48 +2,61 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>DataVault - Recherche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataVault - Index des Données</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-    <h1>DataVault</h1>
+    <header style="text-align: center; padding: 40px 0;">
+        <h1>DataVault</h1>
+        <p style="color: #666;">Explorateur de bases de données universel</p>
+    </header>
     
-    <div class="search-container">
+    <main class="search-container">
         <form id="search-form" autocomplete="off">
             <input type="search" id="site-search" placeholder="Rechercher un fichier (ex: Yo-kai Watch)...">
             <button type="submit">Afficher</button>
         </form>
         <div id="suggestions" class="suggestions-box"></div>
-    </div>
+    </main>
 
-    <footer style="text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 1px solid #eee; color: #888; font-size: 0.85em;">
-        <p>Plateforme de données <strong>DataVault</strong></p>
-        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Droits d'auteur</a></p>
+    <footer style="text-align: center; padding: 60px 20px; border-top: 1px solid #eee; color: #888; font-size: 0.85em; margin-top: 100px;">
+        <p>Plateforme <strong>DataVault</strong> &bull; Centralisation de données</p>
+        <p>&copy; 2025 &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions légales & Confidentialité</a></p>
     </footer>
 
     <script>
-        // Ta liste avec uniquement Yo-kai Watch
+        /**
+         * CONFIGURATION DES FICHIERS
+         * Ajoute tes nouveaux fichiers CSV ici
+         */
         const availableFiles = [
             { 
                 alias: "Yo-kai Watch 2", 
                 path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
-                owner: "LEVEL-5 Inc." 
+                owner: "LEVEL-5 Inc.", 
+                author: "Admin" // Remplace par ton pseudo
             }
         ];
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
 
-        // Fonction unique pour rediriger proprement
+        // Redirection vers le viewer avec les paramètres sécurisés
         function goToViewer(file) {
-            const url = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}`;
-            window.location.href = url;
+            const params = new URLSearchParams({
+                file: file.path,
+                alias: file.alias,
+                owner: file.owner,
+                author: file.author
+            });
+            window.location.href = `viewer.html?${params.toString()}`;
         }
 
-        // Gestion des suggestions pendant la frappe
+        // Système de suggestions en temps réel
         searchInput.addEventListener('input', () => {
-            const val = searchInput.value.toLowerCase();
+            const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
             if (!val) { suggestionsBox.style.display = 'none'; return; }
 
@@ -58,32 +71,23 @@
                 div.onclick = () => {
                     searchInput.value = file.alias;
                     suggestionsBox.style.display = 'none';
-                    goToViewer(file); // Redirection immédiate au clic sur suggestion
+                    goToViewer(file);
                 };
                 suggestionsBox.appendChild(div);
             });
             suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         });
 
-        // Gestion de la validation du formulaire (bouton Afficher ou Touche Entrée)
+        // Validation du formulaire
         document.getElementById('search-form').onsubmit = (e) => {
             e.preventDefault();
             const userInput = searchInput.value.trim().toLowerCase();
-            
-            // On cherche si ce que l'utilisateur a tapé correspond à un alias ou un chemin
-            const found = availableFiles.find(f => 
-                f.alias.toLowerCase() === userInput || 
-                f.path.toLowerCase() === userInput
-            );
-            
-            if (found) {
-                goToViewer(found);
-            } else {
-                alert("Fichier non reconnu. Essayez de sélectionner une suggestion.");
-            }
+            const found = availableFiles.find(f => f.alias.toLowerCase() === userInput);
+            if (found) goToViewer(found);
+            else alert("Veuillez sélectionner un fichier valide dans la liste.");
         };
 
-        // Fermer les suggestions si on clique ailleurs
+        // Fermer les suggestions au clic extérieur
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) suggestionsBox.style.display = 'none';
         });
