@@ -7,14 +7,27 @@
 </head>
 <body>
     <div style="padding: 20px;">
-        <button onclick="window.history.back()" class="btn-back">← Retour</button>
-        <div class="file-header">
-            <h1 id="display-alias">Chargement...</h1>
-            <p id="display-path" class="path-sub"></p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <button onclick="window.history.back()" class="btn-back">← Retour</button>
+                <div class="file-header">
+                    <h1 id="display-alias">Chargement...</h1>
+                    <p id="display-path" class="path-sub"></p>
+                    <p id="last-modified" style="font-size: 0.8em; color: #666; margin-top: -10px;"></p>
+                </div>
+            </div>
+            
+            <a id="download-btn" href="#" download style="margin-top: 20px; text-decoration: none;">
+                <button style="background-color: #28a745;">💾 Télécharger CSV</button>
+            </a>
         </div>
     </div>
 
     <div id="table-container"></div>
+
+    <div style="text-align: center; padding: 40px; color: #888; font-size: 0.9em; border-top: 1px solid #eee; margin-top: 20px;">
+        <p>Base de données fournie par <strong>X</strong></p>
+    </div>
 
     <script>
         async function loadCSV() {
@@ -26,9 +39,18 @@
 
             document.getElementById('display-alias').textContent = fileAlias || "Fichier sans nom";
             document.getElementById('display-path').textContent = filePath;
+            document.getElementById('download-btn').href = filePath;
 
             try {
                 const response = await fetch(filePath);
+                
+                // RÉCUPÉRATION DE LA DATE DE DERNIÈRE MODIFICATION
+                const lastMod = response.headers.get('Last-Modified');
+                if (lastMod) {
+                    const date = new Date(lastMod);
+                    document.getElementById('last-modified').textContent = "Dernière mise à jour : " + date.toLocaleDateString('fr-FR');
+                }
+
                 const text = await response.text();
                 const rows = text.split(/\r?\n/).filter(r => r.trim() !== '');
                 
@@ -42,7 +64,6 @@
                     html += '<tr>';
                     cells.forEach(cell => {
                         let cleanCell = cell.trim().replace(/^"|"$/g, '');
-                        // Transforme les tags (espaces multiples) en virgules
                         cleanCell = cleanCell.replace(/\s{2,}/g, ', ');
                         html += `<td>${cleanCell}</td>`;
                     });
