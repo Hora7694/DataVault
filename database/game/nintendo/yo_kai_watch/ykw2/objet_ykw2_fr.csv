@@ -1,8 +1,8 @@
 N°,Nom,Image,Type,Prix Achat,Prix Vente,Effet sur alliés,Effet sur enn.,Tags
-001,Riz à la prune,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/c/c8/Riz_plein_d%27amour.png/revision/latest?cb=20210205091904&path-prefix=fr,Nourriture,"1.10 €","0.33 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-002,Riz dans feuille,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/e/ed/Riz_dans_une_feuille.png/revision/latest?cb=20220203183137&path-prefix=fr,Nourriture,"1.50 €","0.42 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-003,Riz œufs saumon,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/7/77/Riz_%C5%92ufs_de_Saumon.png/revision/latest?cb=20210503094057&path-prefix=fr,Nourriture,"3.00 €","0.90 €",Rend pas mal de PV,Les Yo-kai vont t'aimer,YKW1
-004,Riz à la crevette,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/d/d3/Riz_%C3%A0_la_crevette.png/revision/latest?cb=20210630093542&path-prefix=fr,Nourriture,"6.00 €","1.80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,YKW1
+001,Riz à la prune,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/c/c8/Riz_plein_d%27amour.png/revision/latest?cb=20210205091904&path-prefix=fr,Nourriture,"1,10 €","0,33 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
+002,Riz dans feuille,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/e/ed/Riz_dans_une_feuille.png/revision/latest?cb=20220203183137&path-prefix=fr,Nourriture,"1,50 €","0,42 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
+003,Riz œufs saumon,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/7/77/Riz_%C5%92ufs_de_Saumon.png/revision/latest?cb=20210503094057&path-prefix=fr,Nourriture,"3,00 €","0,90 €",Rend pas mal de PV,Les Yo-kai vont t'aimer,YKW1
+004,Riz à la crevette,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/d/d3/Riz_%C3%A0_la_crevette.png/revision/latest?cb=20210630093542&path-prefix=fr,Nourriture,"6,00 €","1,80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,YKW1
 005,,,,,,,,
 006,,,,,,,,
 007,,,,,,,,
@@ -43,3 +43,4 @@ N°,Nom,Image,Type,Prix Achat,Prix Vente,Effet sur alliés,Effet sur enn.,Tags
 042,,,,,,,,
 
 043,,,,,,,,
+
