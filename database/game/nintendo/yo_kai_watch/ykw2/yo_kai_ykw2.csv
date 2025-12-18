@@ -22,7 +22,7 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 021,Âmiral,,Vaillant,S,Absorption,Légumes,Combattant,Rare,Aucun,Aucun,YKW1
 022,Bouh,,Vaillant,C,Terre,Oden,Tank,Commun,Aucun,Classique,YKW2
 023,Coach Antonic,,Vaillant,C,Foudre,Hamburger,Ranger,Commun,Aucun,Aucun,"YKW2, Tabloblabla"
-024,Feulion,,Vaillant,C,Feu,Viande,Ranger,Commun,Aucun,Aucun,"YKW1, Sceau Lég."
+024,Feulion,,Vaillant,C,Feu,Viande,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai), Sceau Lég., Tabloblabla"
 025,Vibrilion,,Vaillant,B,Terre,Viande,Combattant,Commun,Aucun,Aucun,YKW1
 026,Siro,,Vaillant,A,Foudre,Viande,Combattant,Rare,Aucun,Aucun,YKW1
 027,Bonneto,,Vaillant,C,Feu,Fruit de mer,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
@@ -115,7 +115,7 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 114,Coléroptère,,Costaud,B,Terre,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet), Voie du mystère, Réa"
 115,Rhinolimit,,Costaud,S,Terre,Légumes,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet), Réa"
 116,Corniaque,,Costaud,S,Terre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég."
-117,Robonyan,,Costaud,A,Glace,Barre de Chocolat,Tank,Commun,Aucun,Aucun,YKW1
+117,Robonyan,,Costaud,A,Glace,Barre de Chocolat,Tank,Commun,Aucun,Aucun,"YKW1, Tabloblabla"
 118,Oronyan,,Costaud,S,Foudre,Barre de Chocolat,Tank,Commun,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég."
 119,Misterre,,Costaud,A,Terre,Légumes,Tank,Commun,Aucun,Aucun,"YKW1, Sceau Lég., Sceau Camaïeul"
 120,Ressak,,Costaud,S,Eau,Légumes,Tank,Commun,Aucun,Aucun,YKW1
@@ -128,8 +128,8 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 127,Cigalopin,,Mignon,E,Vent,Jus,Ranger,Commun,Aucun,Aucun,YKW1
 128,Cigaillard,,Mignon,C,Vent,Jus,Ranger,Commun,Aucun,Aucun,YKW1
 129,Cigazouille,,Mignon,B,Feu,Jus,Ranger,Commun,Aucun,Aucun,YKW1
-130,Chihuaglagla,,Mignon,E,Glace,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
-131,Froahuahua,,Mignon,A,Glace,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+130,Chihuaglagla,,Mignon,E,Glace,Ramen,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+131,Froahuahua,,Mignon,A,Glace,Ramen,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
 132,Cho-cho,,Mignon,S,Feu,Ramen,Ranger,Commun,Aucun,Aucun,YKW1
 133,Traviolette,,Mignon,D,Glace,Déssert,Combattant,Commun,Aucun,Aucun,YKW2
 134,Yokoeil,,Mignon,D,Glace,Oden,Combattant,Commun,Aucun,Classique,YKW2
@@ -159,71 +159,291 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 158,Faux Kappa,,Mignon,A,Eau,Légumes,Combattant,Commun,Aucun,Classique,"YKW2, Sceau Lég., Sceau Déballerine"
 159,Kappadissi,,Mignon,S,Eau,Cuisine Chinoise,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
 160,Maitre Nyada,,Mignon,S,Vent,Fruit de mer,Ranger,Commun,Aucun,Aucun,"YKW2, Sceau Lég., Sceau Déballerine"
-161,,,,,,,,,Aucun,Aucun,
-162,,,,,,,,,Aucun,Aucun,
-163,,,,,,,,,Aucun,Aucun,
-164,,,,,,,,,Aucun,Aucun,
-165,,,,,,,,,Aucun,Aucun,
-166,,,,,,,,,Aucun,Aucun,
-167,,,,,,,,,Aucun,Aucun,
-168,,,,,,,,,Aucun,Aucun,
-169,,,,,,,,,Aucun,Aucun,
-170,,,,,,,,,Aucun,Aucun,
-171,,,,,,,,,Aucun,Aucun,
-172,,,,,,,,,Aucun,Aucun,
-173,,,,,,,,,Aucun,Aucun,
-174,,,,,,,,,Aucun,Aucun,
-175,,,,,,,,,Aucun,Aucun,
-176,,,,,,,,,Aucun,Aucun,
-177,,,,,,,,,Aucun,Aucun,
-178,,,,,,,,,Aucun,Aucun,
-179,,,,,,,,,Aucun,Aucun,
-180,,,,,,,,,Aucun,Aucun,
-181,,,,,,,,,Aucun,Aucun,
-182,,,,,,,,,Aucun,Aucun,
-183,,,,,,,,,Aucun,Aucun,
-184,,,,,,,,,Aucun,Aucun,
-185,,,,,,,,,Aucun,Aucun,
-186,,,,,,,,,Aucun,Aucun,
-187,,,,,,,,,Aucun,Aucun,
-188,,,,,,,,,Aucun,Aucun,
-189,,,,,,,,,Aucun,Aucun,
-190,,,,,,,,,Aucun,Aucun,
-191,,,,,,,,,Aucun,Aucun,
-192,,,,,,,,,Aucun,Aucun,
-193,,,,,,,,,Aucun,Aucun,
-194,,,,,,,,,Aucun,Aucun,
-195,,,,,,,,,Aucun,Aucun,
-196,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
-,,,,,,,,,Aucun,Aucun,
+161,Amoiz,,Bienveillant,E,Foudre,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+162,Pikor,,Bienveillant,D,Terre,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+163,Noripop,,Bienveillant,E,Restauration,Ramen,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion"
+164,Algacarena,,Bienveillant,C,Restauration,Ramen,Ranger,Commun,Aucun,Aucun,"YKW2, Fusion"
+165,Wakapoeira,,Bienveillant,E,Restauration,Ramen,Ranger,Commun,Aucun,Aucun,YKW1
+166,Salsalga,,Bienveillant,D,Restauration,Ramen,Guérisseur,Commun,Aucun,Aucun,YKW1
+167,Granpapéti,,Bienveillant,E,Restauration,Boule de Riz,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+168,Puissanfon,,Bienveillant,B,Absorption,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+169,Grainpère,,Bienveillant,B,Restauration,Boule de Riz,Guérisseur,Commun,Aucun,Aucun,YKW1
+170,Papilla,,Bienveillant,E,Restauration,Légumes,Guérisseur,Commun,Aucun,Aucun,"YKW2, Fusion, Fusion (Yo-Kai)"
+171,Mlle Papilla,,Bienveillant,B,Restauration,Légumes,Guérisseur,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+172,Felipaix,,Bienveillant,E,Terre,Oden,Guérisseur,Commun,Aucun,Aucun,"YKW2, Fusion, Fusion (Objet)"
+173,Monsieur Felipaix,,Bienveillant,B,Restauration,Oden,Guérisseur,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Objet)"
+174,Parasolal,,Bienveillant,E,Vent,Oden,Combattant,Commun,Aucun,Classique,"YKW2, Fusion, Fusion (Yo-Kai)"
+175,Scarasol,,Bienveillant,A,Terre,Sushi,Tank,Commun,Aucun,Classique,"YKW2, Fusion, Fusionné (Yo-Kai)"
+176,Nomoné,,Bienveillant,D,Vent,Lait,Ranger,Commun,Aucun,Aucun,"YKW1, Évolutif"
+177,Ivanupieds,,Bienveillant,A,Vent,Lait,Ranger,Commun,Aucun,Aucun,"YKW2, Évolution"
+178,Noproblemo,,Bienveillant,C,Eau,Lait,Ranger,Commun,Aucun,Aucun,YKW1
+179,Lulutin,,Bienveillant,E,Restauration,Encas,Guérisseur,Commun,Aucun,Classique,"YKW2, Évolutif"
+180,Grégrigry,,Bienveillant,A,Restauration,Encas,Guérisseur,Commun,Aucun,Classique,"YKW2, Évolution"
+181,Papiltation,,Bienveillant,D,Restauration,Jus,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+182,Papiltension,,Bienveillant,D,Absorption,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+183,Hyprapillon,,Bienveillant,A,Restauration,Jus,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+184,Vitapillon,,Bienveillant,S,Restauration,Jus,Guérisseur,Rare,Aucun,Aucun,YKW1
+185,Métaureaulog,,Bienveillant,D,Restauration,Sushi,Guérisseur,Commun,Aucun,Classique,"YKW2, Fusion, Fusion (Objet)"
+186,Tauracle,,Bienveillant,S,Restauration,Sushi,Guérisseur,Commun,Aucun,Classique,"YKW2, Fusion, Fusionné (Objet)"
+187,Donchan,,Bienveillant,C,Restauration,Encas,Ranger,Commun,Aucun,Aucun,YKW2
+188,Sabrille,,Bienveillant,C,Feu,Déssert,Combattant,Commun,Aucun,Aucun,YKW2
+189,Jojojoyeux,,Bienveillant,C,Restauration,Pain,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+190,Paradoxa,,Bienveillant,A,Restauration,Pain,Guérisseur,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+191,Potaumorose,,Bienveillant,A,Vent,Pain,Combattant,Rare,Aucun,Aucun,YKW1
+192,Ratatam,,Bienveillant,B,Restauration,Curry,Guérisseur,Commun,Aucun,Aucun,YKW1
+193,Supernoël,,Bienveillant,B,Foudre,Curry,Combattant,Commun,Aucun,Aucun,"YKW1, Tabloblabla"
+194,Dédé,,Bienveillant,B,Eau,Confiserie,Ranger,Commun,Aucun,Aucun,YKW1
+195,Dédestin,,Bienveillant,A,Eau,Confiserie,Ranger,Commun,Aucun,Aucun,YKW1
+196,Tontonerre,,Bienveillant,A,Foudre,Sushi,Combattant,Commun,Aucun,Aucun,YKW1
+197,Omnitonton,,Bienveillant,S,Foudre,Sushi,Combattant,Rare,Aucun,Aucun,YKW1
+198,Tata Aura,,Bienveillant,A,Restauration,Légumes,Guérisseur,Commun,Aucun,Aucun,YKW1
+199,Tata Câlin,,Bienveillant,S,Restauration,Légumes,Guérisseur,Rare,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég., Sceau Gorgouille"
+200,Kyryn,,Bienveillant,S,Restauration,Cuisine Chinoise,Guérisseur,Commun,Aucun,Classique,"YKW2, Paradis Divin"
+201,Kyrycorne,,Bienveillant,S,Restauration,Soba,Guérisseur,Rare,Aucun,Classique,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+202,Égaroni,,Sombre,E,Glace,Confiserie,Ranger,Commun,Aucun,Aucun,YKW1
+203,Onisoi,,Sombre,D,Absorption,Confiserie,Combattant,Commun,Aucun,Aucun,YKW1
+204,Tortico,,Sombre,E,Terre,Confiserie,Ranger,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Objet)"
+205,Tendino,,Sombre,C,Terre,Confiserie,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Objet)"
+206,Contracto,,Sombre,B,Terre,Confiserie,Combattant,Commun,Aucun,Aucun,YKW1
+207,Couchtar,,Sombre,E,Foudre,Hamburger,Ranger,Commun,Fantôme Bouffis,Aucun,"YKW2, Fusion, Fusion (Yo-Kai)"
+208,Noctambill,,Sombre,B,Foudre,Hamburger,Ranger,Commun,Fantôme Bouffis,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+209,Herbert,,Sombre,E,Eau,Légumes,Combattant,Commun,Esprit Farsseur,Aucun,"YKW2, Fusion, Fusion (Yo-Kai)"
+210,Carnanova,,Sombre,B,Feu,Viande,Combattant,Commun,Esprit Farsseur,Aucun,"YKW2, Fusion, Fusionné (Yo-Kai)"
+211,Nihilistik,,Sombre,E,Absorption,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
+212,Émousstik,,Sombre,C,Absorption,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+213,Grattoptère,,Sombre,A,Foudre,Jus,Combattant,Commun,Aucun,Aucun,YKW1
+214,Marcognito,,Sombre,E,Vent,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Âmeschimie rares, Âme furtive"
+215,Ninjamévu,,Sombre,B,Vent,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Âmeschimie rares, Âme furtive"
+216,Nihilo,,Sombre,A,Vent,Boule de Riz,Combattant,Commun,Aucun,Aucun,YKW1
+217,Suspicioni,,Sombre,D,Eau,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+218,Ragioni,,Sombre,D,Feu,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+219,Contrarioni,,Sombre,B,Foudre,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,YKW1
+220,Chauvekipeut,,Sombre,D,Vent,Viande,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+221,Chauv'coucou,,Sombre,A,Vent,Viande,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusionné (Yo-Kai)"
+222,Vampiloc,,Sombre,A,Vent,Viande,Combattant,Commun,Aucun,Aucun,YKW1
+223,Gloups,,Sombre,D,Absorption,Sushi,Combattant,Commun,Aucun,Aucun,YKW2
+224,Chip-Chope,,Sombre,A,Absorption,Sushi,Combattant,Commun,Aucun,Aucun,YKW2
+225,Hâtila,,Sombre,C,Vent,Curry,Combattant,Commun,Aucun,Aucun,YKW2
+226,Amédélègue,,Sombre,C,Absorption,Sushi,,Commun,Aucun,Aucun,"YKW2, Voie du mystère"
+227,Comte Zapzap,,Sombre,C,Glace,Hamburger,Combattant,Commun,Fantôme Bouffis,Aucun,YKW2
+228,Raltesse,,Sombre,C,Absorption,Lait,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Pièce frisson (Fleur)"
+229,Tengubre,,Sombre,C,Vent,Pain,Combattant,Commun,Aucun,Aucun,"YKW1, Fusion, Fusion (Yo-Kai)"
+230,Bibliotengu,,Sombre,B,Vent,Pain,Combattant,Commun,Aucun,Aucun,YKW1
+231,Snobéa,,Sombre,B,Glace,Sushi,Combattant,Commun,Aucun,Aucun,YKW2
+232,Triptyk,,Sombre,B,Feu,Oden,Combattant,Rare,Aucun,Aucun,YKW2
+233,Dracunyan,,Sombre,B,Absorption,Barre de Chocolat,Combattant,Rare,Aucun,Aucun,"YKW2, Exclu Bingo-Kai, Pièce frisson (Fleur), Pièce frisson (Lune), Pièce frisson (Vent)"
+234,Nimpégase,,Sombre,A,Vent,Légumes,Combattant,Commun,Aucun,Aucun,YKW1
+235,Hennimi,,Sombre,A,Absorption,Légumes,Combattant,Commun,Aucun,Aucun,YKW1
+236,Timidémon,,Sombre,A,Feu,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+237,Belzel,,Sombre,S,Feu,Ramen,Combattant,Commun,Aucun,Aucun,YKW1
+238,Dente,,Sombre,S,Feu,Ramen,Combattant,Rare,Aucun,Aucun,"YKW1, Exclu Bingo-Kai, Sceau Lég., Sceau Gorgouille"
+239,Millyeux,,Sombre,A,Terre,Viande,Tank,Commun,Aucun,Classique,YKW2
+240,Précyeux,,Sombre,S,Foudre,Déssert,Tank,Rare,Aucun,Classique,"YKW2, Exclu Bingo-Kai, Sceau Lég., Sceau Slurpent"
+241,Vénaldo,,Sombre,S,Feu,Viande,Combattant,Commun,Aucun,Aucun,
+242,Maltesse,,Sombre,S,Eau,Viande,Ranger,Rare,Aucun,Aucun,
+243,Potofeu,,Sombre,S,Terre,Soba,Combattant,Rare,Aucun,Aucun,
+244,,,,,,,,Commun,Aucun,Aucun,
+245,,,,,,,,Commun,Aucun,Aucun,
+246,,,,,,,,Commun,Aucun,Aucun,
+247,,,,,,,,Commun,Aucun,Aucun,
+248,,,,,,,,Commun,Aucun,Aucun,
+249,,,,,,,,Commun,Aucun,Aucun,
+250,,,,,,,,Commun,Aucun,Aucun,
+251,,,,,,,,Commun,Aucun,Aucun,
+252,,,,,,,,Commun,Aucun,Aucun,
+253,,,,,,,,Commun,Aucun,Aucun,
+254,,,,,,,,Commun,Aucun,Aucun,
+255,,,,,,,,Commun,Aucun,Aucun,
+256,,,,,,,,Commun,Aucun,Aucun,
+257,,,,,,,,Commun,Aucun,Aucun,
+258,,,,,,,,Commun,Aucun,Aucun,
+259,,,,,,,,Commun,Aucun,Aucun,
+260,,,,,,,,Commun,Aucun,Aucun,
+261,,,,,,,,Commun,,,
+262,,,,,,,,Commun,,,
+263,,,,,,,,Commun,,,
+264,,,,,,,,Commun,,,
+265,,,,,,,,Commun,,,
+266,,,,,,,,Commun,,,
+267,,,,,,,,Commun,,,
+268,,,,,,,,Commun,,,
+269,,,,,,,,Commun,,,
+270,,,,,,,,Commun,,,
+271,,,,,,,,Commun,,,
+272,,,,,,,,Commun,,,
+273,,,,,,,,Commun,,,
+274,,,,,,,,Commun,,,
+275,,,,,,,,Commun,,,
+276,,,,,,,,Commun,,,
+277,,,,,,,,Commun,,,
+278,,,,,,,,Commun,,,
+279,,,,,,,,Commun,,,
+280,,,,,,,,Commun,,,
+281,,,,,,,,Commun,,,
+282,,,,,,,,Commun,,,
+283,,,,,,,,Commun,,,
+284,,,,,,,,Commun,,,
+285,,,,,,,,Commun,,,
+286,,,,,,,,Commun,,,
+287,,,,,,,,Commun,,,
+288,,,,,,,,Commun,,,
+289,,,,,,,,Commun,,,
+290,,,,,,,,Commun,,,
+291,,,,,,,,Commun,,,
+292,,,,,,,,Commun,,,
+293,,,,,,,,Commun,,,
+294,,,,,,,,Commun,,,
+295,,,,,,,,Commun,,,
+296,,,,,,,,Commun,,,
+297,,,,,,,,Commun,,,
+298,,,,,,,,Commun,,,
+299,,,,,,,,Commun,,,
+300,,,,,,,,Commun,,,
+301,,,,,,,,Commun,,,
+302,,,,,,,,Commun,,,
+303,,,,,,,,Commun,,,
+304,,,,,,,,Commun,,,
+305,,,,,,,,Commun,,,
+306,,,,,,,,Commun,,,
+307,,,,,,,,Commun,,,
+308,,,,,,,,Commun,,,
+309,,,,,,,,Commun,,,
+310,,,,,,,,Commun,,,
+311,,,,,,,,Commun,,,
+312,,,,,,,,Commun,,,
+313,,,,,,,,Commun,,,
+314,,,,,,,,Commun,,,
+315,,,,,,,,Commun,,,
+316,,,,,,,,Commun,,,
+317,,,,,,,,Commun,,,
+318,,,,,,,,Commun,,,
+319,,,,,,,,Commun,,,
+320,,,,,,,,Commun,,,
+321,,,,,,,,Commun,,,
+322,,,,,,,,Commun,,,
+323,,,,,,,,Commun,,,
+324,,,,,,,,Commun,,,
+325,,,,,,,,Commun,,,
+326,,,,,,,,Commun,,,
+327,,,,,,,,Commun,,,
+328,,,,,,,,Commun,,,
+329,,,,,,,,Commun,,,
+330,,,,,,,,,,,
+331,,,,,,,,,,,
+332,,,,,,,,,,,
+333,,,,,,,,,,,
+334,,,,,,,,,,,
+335,,,,,,,,,,,
+336,,,,,,,,,,,
+337,,,,,,,,,,,
+338,,,,,,,,,,,
+339,,,,,,,,,,,
+340,,,,,,,,,,,
+341,,,,,,,,,,,
+342,,,,,,,,,,,
+343,,,,,,,,,,,
+344,,,,,,,,,,,
+345,,,,,,,,,,,
+346,,,,,,,,,,,
+347,,,,,,,,,,,
+348,,,,,,,,,,,
+349,,,,,,,,,,,
+350,,,,,,,,,,,
+351,,,,,,,,,,,
+352,,,,,,,,,,,
+353,,,,,,,,,,,
+354,,,,,,,,,,,
+355,,,,,,,,,,,
+356,,,,,,,,,,,
+357,,,,,,,,,,,
+358,,,,,,,,,,,
+359,,,,,,,,,,,
+360,,,,,,,,,,,
+361,,,,,,,,,,,
+362,,,,,,,,,,,
+363,,,,,,,,,,,
+364,,,,,,,,,,,
+365,,,,,,,,,,,
+366,,,,,,,,,,,
+367,,,,,,,,,,,
+368,,,,,,,,,,,
+369,,,,,,,,,,,
+370,,,,,,,,,,,
+371,,,,,,,,,,,
+372,,,,,,,,,,,
+373,,,,,,,,,,,
+374,,,,,,,,,,,
+375,,,,,,,,,,,
+376,,,,,,,,,,,
+377,,,,,,,,,,,
+378,,,,,,,,,,,
+379,,,,,,,,,,,
+380,,,,,,,,,,,
+381,,,,,,,,,,,
+382,,,,,,,,,,,
+383,,,,,,,,,,,
+384,,,,,,,,,,,
+385,,,,,,,,,,,
+386,,,,,,,,,,,
+387,,,,,,,,,,,
+388,,,,,,,,,,,
+389,,,,,,,,,,,
+390,,,,,,,,,,,
+391,,,,,,,,,,,
+392,,,,,,,,,,,
+393,,,,,,,,,,,
+394,,,,,,,,,,,
+395,,,,,,,,,,,
+396,,,,,,,,,,,
+397,,,,,,,,,,,
+398,,,,,,,,,,,
+399,,,,,,,,,,,
+400,,,,,,,,,,,
+401,,,,,,,,,,,
+402,,,,,,,,,,,
+403,,,,,,,,,,,
+404,,,,,,,,,,,
+405,,,,,,,,,,,
+406,,,,,,,,,,,
+407,,,,,,,,,,,
+408,,,,,,,,,,,
+409,,,,,,,,,,,
+410,,,,,,,,,,,
+411,,,,,,,,,,,
+412,,,,,,,,,,,
+413,,,,,,,,,,,
+414,,,,,,,,,,,
+415,,,,,,,,,,,
+416,,,,,,,,,,,
+417,,,,,,,,,,,
+418,,,,,,,,,,,
+419,,,,,,,,,,,
+420,,,,,,,,,,,
+421,,,,,,,,,,,
+422,,,,,,,,,,,
+423,,,,,,,,,,,
+424,,,,,,,,,,,
+425,,,,,,,,,,,
+426,,,,,,,,,,,
+427,,,,,,,,,,,
+428,,,,,,,,,,,
+429,,,,,,,,,,,
+430,,,,,,,,,,,
+431,,,,,,,,,,,
+432,,,,,,,,,,,
+433,,,,,,,,,,,
+434,,,,,,,,,,,
+435,,,,,,,,,,,
+436,,,,,,,,,,,
+437,,,,,,,,,,,
+438,,,,,,,,,,,
+439,,,,,,,,,,,
+440,,,,,,,,,,,
+441,,,,,,,,,,,
+442,,,,,,,,,,,
+443,,,,,,,,,,,
+444,,,,,,,,,,,
+445,,,,,,,,,,,
+446,,,,,,,,,,,
+447,,,,,,,,,,,
+448,,,,,,,,,,,
