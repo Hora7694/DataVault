@@ -2,39 +2,29 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataVault - Recherche</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        html, body { height: 100%; margin: 0; }
-        body { display: flex; flex-direction: column; }
-        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    </style>
 </head>
 <body>
     <button id="theme-toggle">🌙 Mode Sombre</button>
-
-    <div class="main-content">
+    <div style="margin-top: 100px; text-align: center;">
         <h1>DataVault</h1>
         <div class="search-container">
-            <form id="search-form" autocomplete="off" style="display: flex; gap: 10px;">
-                <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)..." style="min-width: 350px;">
-            </form>
+            <input type="search" id="site-search" placeholder="Rechercher un fichier...">
             <div id="suggestions" class="suggestions-box" style="display: none;"></div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.8em; color: var(--sub-text);">
-        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
-    </footer>
-
     <script>
-        // --- LOGIQUE DU DARK MODE ---
         const toggleBtn = document.getElementById('theme-toggle');
-        if (localStorage.getItem('dark-mode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-            toggleBtn.textContent = "☀️ Mode Clair";
+        
+        function applyTheme() {
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                toggleBtn.textContent = "☀️ Mode Clair";
+            }
         }
+
         toggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -42,42 +32,32 @@
             toggleBtn.textContent = isDark ? "☀️ Mode Clair" : "🌙 Mode Sombre";
         });
 
-        // --- RECHERCHE ---
+        applyTheme();
+
+        // Logique de recherche (Registry)
         let availableFiles = [];
-        async function loadRegistry() {
-            try {
-                const response = await fetch('registry.json');
-                availableFiles = await response.json();
-            } catch (e) { console.error("Erreur registre:", e); }
-        }
+        fetch('registry.json').then(r => r.json()).then(data => availableFiles = data);
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
 
         searchInput.addEventListener('input', () => {
-            const val = searchInput.value.trim().toLowerCase();
+            const val = searchInput.value.toLowerCase();
             suggestionsBox.innerHTML = '';
             if (val.length < 2) { suggestionsBox.style.display = 'none'; return; }
-
+            
             const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
-            if (matches.length > 0) {
-                matches.forEach(file => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    div.style.cursor = 'pointer';
-                    div.innerHTML = `<strong>${file.alias}</strong>`;
-                    div.addEventListener('click', () => {
-                        window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}&author=${encodeURIComponent(file.author)}`;
-                    });
-                    suggestionsBox.appendChild(div);
-                });
-                suggestionsBox.style.display = 'block';
-            } else {
-                suggestionsBox.style.display = 'none';
-            }
+            matches.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `<strong>${file.alias}</strong>`;
+                div.onclick = () => {
+                    window.location.href = `viewer.html?file=${encodeURIComponent(file.path)}&alias=${encodeURIComponent(file.alias)}&owner=${encodeURIComponent(file.owner)}&author=${encodeURIComponent(file.author)}`;
+                };
+                suggestionsBox.appendChild(div);
+            });
+            suggestionsBox.style.display = matches.length ? 'block' : 'none';
         });
-
-        loadRegistry();
     </script>
 </body>
 </html>
