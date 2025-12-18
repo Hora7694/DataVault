@@ -1,94 +1,91 @@
-/* Reset de base */
+/* RESET ET BASE */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 20px;
     color: #333;
 }
 
-/* Titre principal centré */
+/* TITRE PRINCIPAL (INDEX) */
 h1 {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 60px;
     margin-bottom: 30px;
-    font-size: 2.5em;
+    font-size: 2.8em;
     color: #222;
 }
 
-/* Conteneur de recherche */
+/* BARRE DE RECHERCHE */
 .search-container {
     position: relative;
     width: fit-content;
-    margin: 0 auto 50px auto;
+    margin: 0 auto;
 }
 
 form {
     display: flex;
-    gap: 12px;
+    gap: 15px;
     justify-content: center;
     align-items: center;
 }
 
-/* Barre de recherche 700px */
 input[type="search"] {
     width: 700px;
-    padding: 14px 25px;
+    padding: 15px 25px;
     border-radius: 30px;
     border: 1px solid #ddd;
     outline: none;
     font-size: 16px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
 }
 
 input[type="search"]:focus {
     border-color: #5553ff;
-    box-shadow: 0 4px 12px rgba(85, 83, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(85, 83, 255, 0.15);
 }
 
-/* Bouton Afficher */
 button {
     background-color: #5553ff;
     color: white;
     border: none;
-    padding: 14px 30px;
+    padding: 15px 35px;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    transition: background 0.3s, transform 0.1s;
+    transition: background 0.3s;
 }
 
 button:hover {
     background-color: #3f3dbb;
 }
 
-button:active {
-    transform: scale(0.98);
-}
-
-/* Boîte de suggestions */
+/* SUGGESTIONS */
 .suggestions-box {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%; /* S'adapte à la largeur du formulaire */
+    width: 100%;
     background: white;
     border: 1px solid #ddd;
     border-radius: 15px;
-    margin-top: 8px;
+    margin-top: 10px;
     z-index: 1000;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: none;
     overflow: hidden;
 }
 
 .suggestion-item {
-    padding: 15px 20px;
+    padding: 15px 25px;
     cursor: pointer;
     border-bottom: 1px solid #f0f0f0;
-    transition: background 0.2s;
 }
 
 .suggestion-item:last-child {
@@ -103,61 +100,58 @@ button:active {
     font-weight: bold;
     color: #333;
     display: block;
-    margin-bottom: 2px;
 }
 
 .path-hint {
     font-size: 0.8em;
-    color: #888;
+    color: #999;
 }
 
-/* --- Styles spécifiques au Viewer --- */
+/* --- AFFICHAGE (VIEWER.HTML) --- */
 
 .file-header {
     text-align: left;
-    margin: 20px 0 30px 2.5%; /* Aligné avec le tableau */
+    margin: 20px 0 30px 2.5%;
 }
 
 .file-header h1 {
     text-align: left;
     margin: 0;
-    font-size: 2em;
-    color: #222;
+    font-size: 2.2em;
 }
 
 .path-sub {
     color: #888;
     font-size: 0.95em;
     margin-top: 5px;
-    font-family: monospace;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .btn-back {
     margin-left: 2.5%;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 12px 25px;
+    border-radius: 25px;
     cursor: pointer;
     border: 1px solid #ddd;
     background: white;
     font-weight: bold;
     color: #555;
-    transition: all 0.2s;
+    transition: 0.2s;
 }
 
 .btn-back:hover {
     background: #f0f0f0;
-    border-color: #ccc;
 }
 
-/* Tableau */
+/* TABLEAU DES DONNÉES */
 table {
     width: 95%;
     margin: 0 auto 50px auto;
     border-collapse: collapse;
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 th {
@@ -165,23 +159,17 @@ th {
     color: white;
     padding: 15px;
     text-align: left;
-    font-weight: 600;
+    font-size: 0.9em;
     text-transform: uppercase;
-    font-size: 0.85em;
-    letter-spacing: 0.5px;
 }
 
 td {
     padding: 12px 15px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f2f2f2;
     font-size: 0.95em;
     color: #444;
 }
 
-tr:last-child td {
-    border-bottom: none;
-}
-
 tr:hover {
-    background-color: #fbfbff;
+    background-color: #f9f9ff;
 }
