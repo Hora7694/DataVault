@@ -32,7 +32,6 @@
         <div class="search-container">
             <form id="search-form" autocomplete="off" style="display: flex; gap: 10px;">
                 <input type="search" id="site-search" placeholder="Rechercher (ex: Yo-kai Watch)..." style="min-width: 300px;">
-                <!--<button type="submit">Afficher</button>-->
             </form>
             <div id="suggestions" class="suggestions-box"></div>
         </div>
@@ -53,14 +52,17 @@
     </footer>
 
     <script>
-        const availableFiles = [
-            { 
-                alias: "Liste des Yo-Kai de Yo-kai Watch 2", 
-                path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
-                owner: "LEVEL-5 Inc.", 
-                author: "Admin" 
+        let availableFiles = []; // Liste vide au départ
+
+        // RÉCUPÉRATION DES DONNÉES DEPUIS LE JSON
+        async function loadRegistry() {
+            try {
+                const response = await fetch('registry.json');
+                availableFiles = await response.json();
+            } catch (err) {
+                console.error("Erreur de lecture du fichier registry.json", err);
             }
-        ];
+        }
 
         const searchInput = document.getElementById('site-search');
         const suggestionsBox = document.getElementById('suggestions');
@@ -121,8 +123,9 @@
                 suggestionsBox.style.display = 'none';
             }
         });
+
+        // Lancer le chargement au démarrage
+        loadRegistry();
     </script>
 </body>
 </html>
-
-
