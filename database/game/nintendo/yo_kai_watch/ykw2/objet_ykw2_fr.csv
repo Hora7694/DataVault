@@ -1,18 +1,18 @@
 N°,Nom,Image,Type,Prix Achat,Prix Vente,Effet sur alliés,Effet sur enn.,Tags
-001,Barre de chocolat,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/a/ac/Barre_de_chocolat.png/revision/latest?cb=20220212134247&path-prefix=fr,Nourriture,"1,00 €","0,30 €",Rend très peu de PV,Les Yo-kai vont t'aimer,YKW2
-002,Riz à la prune,https://i.imgur.com/4PvGFGt.png,Nourriture,"1,10 €","0,33 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-003,Riz dans feuille,https://i.imgur.com/IGTM821.png,Nourriture,"1,50 €","0,42 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-004,Riz œufs saumon,https://i.imgur.com/AZPYU9F.png,Nourriture,"3,00 €","0,90 €",Rend pas mal de PV,Les Yo-kai vont t'aimer,YKW1
-005,Riz à la crevette,https://i.imgur.com/oH6hPhg.png,Nourriture,"6,00 €","1,80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,YKW1
-006,Sandwich,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/f/ff/Sandwich.png/revision/latest?cb=20251125231242&path-prefix=fr,Nourriture,"2,20 €","0,66 €",Rend un peu de PV,Les Yo-kai t'apprécieront,YKW1
-007,Patte d'ours,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/7/71/Patte_d%27Ours.png/revision/latest?cb=20210416091614&path-prefix=fr,Nourriture,"1,20 €","0,36 €",Rend très peu de PV,Les Yo-kai vont t'aimer,YKW1
-008,Pain au curry,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/0/08/Pain_au_curry.png/revision/latest?cb=20210503084610&path-prefix=fr,Nourriture,"1,80 €","0,54 €",Rend un peu de PV,Les Yo-kai t'aimeront beaucoup,YKW1
-009,Baguette,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/3/3b/Baguette.png/revision/latest?cb=20250226001358&path-prefix=fr,Nourriture,"3,80 €","1,14 €",Rend pas mal de PV,Les Yo-kai t'aimeront beaucoup,YKW1
-010,Blablagel,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/b/b5/Blablagel.png/revision/latest?cb=20211130082228&path-prefix=fr,Nourriture,"6,00 €","1,80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,YKW1
-011,Chewing-gum,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/6/60/Chewing-gum.png/revision/latest?cb=20250226002645&path-prefix=fr,Nourriture,"0,10 €","0,03 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-012,Bonbon poisseux,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/6/66/Bonbon_Poisseux.png/revision/latest?cb=20210416062856&path-prefix=fr,Nourriture,"0,20 €","0,06 €",Rend très peu de PV,Les Yo-kai t'apprécieront,YKW1
-013,Chips géante,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/e/e7/Chips_G%C3%A9ante.png/revision/latest?cb=20210513102005&path-prefix=fr,Nourriture,"0,30 €","0,09 €",Rend très peu de PV,Les Yo-kai vont t'aimer,YKW1
-014,Bonbons fruits,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/d/de/Bonbons_fruits.png/revision/latest?cb=20220205105831&path-prefix=fr,Nourriture,"1,20 €","0,36 €",Rend très peu de PV,Les Yo-kai t'aimeront beaucoup,YKW1
+001,Barre de chocolat,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/a/ac/Barre_de_chocolat.png/revision/latest?cb=20220212134247&path-prefix=fr,Nourriture,"1,00 €","0,30 €",Rend très peu de PV,Les Yo-kai vont t'aimer,"YKW2, Bare de Chocolat"
+002,Riz à la prune,https://i.imgur.com/4PvGFGt.png,Nourriture,"1,10 €","0,33 €",Rend très peu de PV,Les Yo-kai t'apprécieront,"YKW1, Boulette de Riz"
+003,Riz dans feuille,https://i.imgur.com/IGTM821.png,Nourriture,"1,50 €","0,42 €",Rend très peu de PV,Les Yo-kai t'apprécieront,"YKW1, Boulette de Riz"
+004,Riz œufs saumon,https://i.imgur.com/AZPYU9F.png,Nourriture,"3,00 €","0,90 €",Rend pas mal de PV,Les Yo-kai vont t'aimer,"YKW1, Boulette de Riz"
+005,Riz à la crevette,https://i.imgur.com/oH6hPhg.png,Nourriture,"6,00 €","1,80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,"YKW1, Boulette de Riz"
+006,Sandwich,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/f/ff/Sandwich.png/revision/latest?cb=20251125231242&path-prefix=fr,Nourriture,"2,20 €","0,66 €",Rend un peu de PV,Les Yo-kai t'apprécieront,"YKW1, Pain"
+007,Patte d'ours,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/7/71/Patte_d%27Ours.png/revision/latest?cb=20210416091614&path-prefix=fr,Nourriture,"1,20 €","0,36 €",Rend très peu de PV,Les Yo-kai vont t'aimer,"YKW1, Pain"
+008,Pain au curry,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/0/08/Pain_au_curry.png/revision/latest?cb=20210503084610&path-prefix=fr,Nourriture,"1,80 €","0,54 €",Rend un peu de PV,Les Yo-kai t'aimeront beaucoup,"YKW1, Pain"
+009,Baguette,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/3/3b/Baguette.png/revision/latest?cb=20250226001358&path-prefix=fr,Nourriture,"3,80 €","1,14 €",Rend pas mal de PV,Les Yo-kai t'aimeront beaucoup,"YKW1, Pain"
+010,Blablagel,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/b/b5/Blablagel.png/revision/latest?cb=20211130082228&path-prefix=fr,Nourriture,"6,00 €","1,80 €",Rend beaucoup de PV,Les Yo-kai vont t'adorer,"YKW1, Pain"
+011,Chewing-gum,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/6/60/Chewing-gum.png/revision/latest?cb=20250226002645&path-prefix=fr,Nourriture,"0,10 €","0,03 €",Rend très peu de PV,Les Yo-kai t'apprécieront,"YKW1, Confiserie"
+012,Bonbon poisseux,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/6/66/Bonbon_Poisseux.png/revision/latest?cb=20210416062856&path-prefix=fr,Nourriture,"0,20 €","0,06 €",Rend très peu de PV,Les Yo-kai t'apprécieront,"YKW1, Confiserie"
+013,Chips géante,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/e/e7/Chips_G%C3%A9ante.png/revision/latest?cb=20210513102005&path-prefix=fr,Nourriture,"0,30 €","0,09 €",Rend très peu de PV,Les Yo-kai vont t'aimer,"YKW1, Confiserie"
+014,Bonbons fruits,https://static.wikia.nocookie.net/yokai-watch-fr2142/images/d/de/Bonbons_fruits.png/revision/latest?cb=20220205105831&path-prefix=fr,Nourriture,"1,20 €","0,36 €",Rend très peu de PV,Les Yo-kai t'aimeront beaucoup,"YKW1, Confiserie"
 015,,,Nourriture,,,,,
 016,,,Nourriture,,,,,
 017,,,Nourriture,,,,,
