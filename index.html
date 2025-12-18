@@ -19,25 +19,23 @@
     </div>
 
     <footer style="text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 100px; font-size: 0.8em; color: #888;">
-        <p>&copy; 2025 DataVault &bull; <a href="legal.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
+        <p>&copy; 2025 DataVault &bull; <a href="legale.html" style="color: #5553ff; text-decoration: none;">Mentions Légales</a></p>
     </footer>
 
     <script>
-        // LISTE DES FICHIERS (Vérifie bien les chemins !)
-        const availableFiles = [
-            { 
-                alias: "Yo-kai Watch 2", 
-                path: "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2.csv",
-                owner: "LEVEL-5 Inc.", 
-                author: "Admin" 
+        let availableFiles = [];
+
+        // CHARGEMENT DU BACKEND JSON
+        async function initData() {
+            try {
+                const response = await fetch('registry.json');
+                if (!response.ok) throw new Error("Fichier registry.json introuvable");
+                availableFiles = await response.json();
+            } catch (err) {
+                console.error("Erreur de chargement du registre :", err);
             }
-        ];
+        }
 
-        const searchInput = document.getElementById('site-search');
-        const suggestionsBox = document.getElementById('suggestions');
-        const searchForm = document.getElementById('search-form');
-
-        // FONCTION DE REDIRECTION (Sécurisée)
         function goToViewer(file) {
             if (!file) return;
             const p = new URLSearchParams();
@@ -48,27 +46,18 @@
             window.location.href = "viewer.html?" + p.toString();
         }
 
-        // AFFICHAGE DES SUGGESTIONS
         searchInput.addEventListener('input', () => {
             const val = searchInput.value.toLowerCase().trim();
             suggestionsBox.innerHTML = '';
-            
-            if (val.length < 1) {
-                suggestionsBox.style.display = 'none';
-                return;
-            }
+            if (val.length < 1) { suggestionsBox.style.display = 'none'; return; }
 
-            const matches = availableFiles.filter(f => 
-                f.alias.toLowerCase().includes(val)
-            );
+            const matches = availableFiles.filter(f => f.alias.toLowerCase().includes(val));
 
             if (matches.length > 0) {
                 matches.forEach(file => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
-                    div.style.cursor = 'pointer';
                     div.innerHTML = `<strong>${file.alias}</strong>`;
-                    // Clic sur une suggestion
                     div.addEventListener('click', () => {
                         searchInput.value = file.alias;
                         suggestionsBox.style.display = 'none';
@@ -82,25 +71,15 @@
             }
         });
 
-        // VALIDATION DU FORMULAIRE (Bouton ou Entrée)
-        searchForm.addEventListener('submit', (e) => {
+        document.getElementById('search-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const val = searchInput.value.trim().toLowerCase();
+            const val = document.getElementById('site-search').value.trim().toLowerCase();
             const found = availableFiles.find(f => f.alias.toLowerCase() === val);
-            
-            if (found) {
-                goToViewer(found);
-            } else {
-                alert("Fichier non trouvé. Veuillez taper le nom exact ou cliquer sur une suggestion.");
-            }
+            if (found) goToViewer(found);
+            else alert("Fichier non trouvé.");
         });
 
-        // FERMER LES SUGGESTIONS SI ON CLIQUE AILLEURS
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                suggestionsBox.style.display = 'none';
-            }
-        });
+        initData();
     </script>
 </body>
 </html>
