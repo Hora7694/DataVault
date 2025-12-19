@@ -233,15 +233,15 @@ tr:hover {
 }
 
 .cell-image {
-    /* On utilise une variable CSS pour la taille minimale */
-    width: var(--min-size, 50px); 
+    /* On force la largeur min avec !important pour gagner sur les autres styles */
+    width: var(--min-size, 50px) !important; 
     height: auto;
-    max-width: 150px; /* Limite haute pour ne pas casser le tableau */
+    max-width: 150px; 
     object-fit: contain;
     display: block;
     margin: auto;
     image-rendering: pixelated; 
-    transition: transform 0.3s ease; /* Transition plus douce */
+    transition: transform 0.3s ease;
 }
 
 .cell-image:hover {
@@ -254,4 +254,5 @@ tr:hover {
     background: rgba(255,255,255,0.1); /* Petit fond pour voir la transparence */
     border-radius: 4px;
 }
+
 
