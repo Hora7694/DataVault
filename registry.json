@@ -20,6 +20,7 @@
     "path": "database/test/test.csv",
     "owner": "Gemini",
     "author": "kHorah_",
-    "image_author": ""
+    "image_author": "",
+    "min_img_size": ""
   }
 ]
