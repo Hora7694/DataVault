@@ -249,10 +249,11 @@ tr:hover {
     transform: scale(1.5);
     z-index: 99;
     position: relative;
-    cursor: zoom-in;
+    cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ombre pour faire ressortir l'image zoomée */
     background: rgba(255,255,255,0.1); /* Petit fond pour voir la transparence */
     border-radius: 4px;
 }
+
 
 
