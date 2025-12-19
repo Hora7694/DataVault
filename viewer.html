@@ -41,6 +41,7 @@
             </a>
         </div>
         <p id="display-path" style="color: #888; font-size: 0.85em; margin-top: 5px; font-family: monospace;"></p>
+        <p id="last-modified" style="font-size: 0.8em; color: #aaa; margin-top: 5px;"></p>
     </div>
 
     <div id="table-container" style="overflow-x: auto;"></div>
@@ -91,6 +92,11 @@
                 const response = await fetch(filePath);
                 if (!response.ok) throw new Error("Fichier introuvable.");
 
+                const lastMod = response.headers.get('Last-Modified');
+                if (lastMod) {
+                    document.getElementById('last-modified').textContent = "Dernière mise à jour : " + new Date(lastMod).toLocaleDateString('fr-FR');
+                }
+                
                 const text = await response.text();
                 const rows = text.split(/\r?\n/).filter(row => row.trim() !== '');
                 
@@ -164,4 +170,5 @@
     </script>
 </body>
 </html>
+
 
