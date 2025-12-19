@@ -2,16 +2,16 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 001,Woko,https://i.imgur.com/SY8Bd1s.png,Vaillant,E,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
 002,Pagno,https://i.imgur.com/llvDXJv.png,Vaillant,C,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
 003,Alfoncéo,https://i.imgur.com/xdzMfUN.png,Vaillant,B,Terre,Boule de Riz,Combattant,Rare,Aucun,Aucun,YKW1
-004,Toumou,,Vaillant,E,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
-005,Lamlam'mou,,Vaillant,C,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
-006,Samoumouraï,,Vaillant,B,Glace,Jus,Combattant,Rare,Aucun,Aucun,YKW1
-007,Samoussrai,,Vaillant,E,Glace,Déssert,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
-008,Ronimpec,,Vaillant,B,Glace,Déssert,Guérisseur,Commun,Aucun,Aucun,"YKW2, Évolution, Tabloblabla"
-009,Roupilion,,Vaillant,E,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
-010,Rugis,,Vaillant,A,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution"
-011,Trépigno,,Vaillant,E,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusion (Objet)"
-012,Zerberker,,Vaillant,A,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Objet)"
-013,Fouétar,,Vaillant,S,Glace,Viande,Combattant,Rare,Aucun,Aucun,YKW1
+004,Toumou,https://i.imgur.com/LDF2x6A.png,Vaillant,E,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolutif"
+005,Lamlam'mou,https://i.imgur.com/Cht0708.png,Vaillant,C,Vent,Jus,Combattant,Commun,Aucun,Aucun,"YKW1, Évolution"
+006,Samoumouraï,https://i.imgur.com/c94l7P6.png,Vaillant,B,Glace,Jus,Combattant,Rare,Aucun,Aucun,YKW1
+007,Samoussrai,https://i.imgur.com/kzEJTyA.png,Vaillant,E,Glace,Déssert,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
+008,Ronimpec,https://i.imgur.com/Pf4LhF2.png,Vaillant,B,Glace,Déssert,Guérisseur,Commun,Aucun,Aucun,"YKW2, Évolution, Tabloblabla"
+009,Roupilion,https://i.imgur.com/RzIk1h7.png,Vaillant,E,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolutif"
+010,Rugis,https://i.imgur.com/UCkFNFk.png,Vaillant,A,Glace,Cuisine Chinoise,Combattant,Commun,Aucun,Aucun,"YKW2, Évolution"
+011,Trépigno,https://i.imgur.com/xBQvSTU.png,Vaillant,E,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusion (Objet)"
+012,Zerberker,https://i.imgur.com/cN9YiAW.png,Vaillant,A,Feu,Viande,Combattant,Commun,Aucun,Aucun,"YKW2, Fusion, Fusionné (Objet)"
+013,Fouétar,https://i.imgur.com/55CODIy.png,Vaillant,S,Glace,Viande,Combattant,Rare,Aucun,Aucun,YKW1
 014,Sumochi,,Vaillant,D,Terre,Boule de Riz,Combattant,Commun,Aucun,Aucun,"YKW1, Tabloblabla"
 015,Mochimacho,,Vaillant,D,Feu,Boule de Riz,Combattant,Commun,Aucun,Aucun,YKW1
 016,Sale de bain,,Vaillant,D,Foudre,Oden,Combattant,Commun,Aucun,Classique,YKW2
@@ -447,6 +447,3 @@ N°,Nom,Image,Tribu,Rang,Type,Nourrit. Pref.,Rôle,Rareté,Clan,Affiliation,Tags
 446,,,,,,,,,,,
 447,,,,,,,,,,,
 448,,,,,,,,,,,
-
-
-
