@@ -4,14 +4,16 @@
     "path": "database/game/nintendo/yo_kai_watch/ykw2/yo_kai_ykw2_fr.csv",
     "owner": "LEVEL-5 Inc.",
     "author": "kHorah_",
-    "image_author": "Fandom Wiki" 
+    "image_author": "Fandom Wiki",
+    "min_img_size": "100" 
   },
   {
     "alias": "Liste des Objets de Yo-kai Watch 2",
     "path": "database/game/nintendo/yo_kai_watch/ykw2/objet_ykw2_fr.csv",
     "owner": "LEVEL-5 Inc.",
     "author": "kHorah_",
-    "image_author": "Fandom Wiki"
+    "image_author": "Fandom Wiki",
+    "min_img_size": "50"
   },
   {
     "alias": "Liste de Test",
